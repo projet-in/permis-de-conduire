@@ -170,6 +170,7 @@ function formatChrono(s){
 function renderQuestionExam(){
   const q = examQuestions[examIndex];
   const el = document.getElementById("vue-examen");
+  const visuel = detecterVisuelQuestion(q.q);
   el.innerHTML = `
     <div class="barre-exam">
       <span class="compteur">Question ${examIndex+1} / 50</span>
@@ -179,6 +180,7 @@ function renderQuestionExam(){
     <div class="carte-question">
       <span class="etiquette-theme ${q.grave?'grave':''}">${q.themeNom}${q.grave?' · faute grave':''}</span>
       <h3>${q.q}</h3>
+      ${visuel ? `<div class="visuel-question visuel-question-${visuel.type}"><div data-${visuel.type==='scene'?'scene':'signe'}="${visuel.valeur}"></div></div>` : ""}
       <div class="reponses">
         ${q.opts.map((o,i)=>`<button data-i="${i}">${o}</button>`).join("")}
       </div>
@@ -190,6 +192,7 @@ function renderQuestionExam(){
       </div>
     </div>
   `;
+  if(visuel) injecterVisuels(el);
   el.querySelectorAll(".reponses button").forEach(b=>{
     b.addEventListener("click", ()=>repondreExam(parseInt(b.dataset.i)));
   });
@@ -274,10 +277,13 @@ function finirExamen(){
       ${erreurs.length ? `
         <h3 style="margin-top:1.6rem;text-align:left">Revue des erreurs (${erreurs.length})</h3>
         <div class="revue">
-          ${erreurs.map(r=>`
+          ${erreurs.map(r=>{
+            const v = detecterVisuelQuestion(r.q.q);
+            return `
             <div class="carte-question">
               <span class="etiquette-theme ${r.grave?'grave':''}">${r.q.themeNom}${r.grave?' · faute grave':''}</span>
               <h3>${r.q.q}</h3>
+              ${v ? `<div class="visuel-question visuel-question-${v.type}"><div data-${v.type==='scene'?'scene':'signe'}="${v.valeur}"></div></div>` : ""}
               <div class="reponses">
                 ${r.q.opts.map((o,i)=>`
                   <button disabled class="${i===r.q.a?'bonne':(i===r.choisi?'mauvaise':'')}">${o}</button>
@@ -285,13 +291,14 @@ function finirExamen(){
               </div>
               <div class="explication ${r.correct?'ok':'ko'}">${r.q.exp}</div>
             </div>
-          `).join("")}
+          `;}).join("")}
         </div>
       ` : ""}
     </div>
   `;
   el.querySelector("[data-goto]").addEventListener("click", ()=>allerA("accueil"));
   document.getElementById("btn-recommencer").addEventListener("click", renderConfigExam);
+  injecterVisuels(el);
 
   // meilleur score en localStorage
   try{

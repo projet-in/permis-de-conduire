@@ -183,6 +183,14 @@ label.opt-chrono{display:flex;align-items:center;gap:.5rem;font-size:.9rem;margi
   letter-spacing:.06em;text-transform:uppercase;border-radius:999px;padding:.25rem .7rem;margin-bottom:.7rem}
 .etiquette-theme.grave{background:#FDE9EC;color:var(--rouge)}
 .carte-question h3{font-size:1.08rem;font-weight:700;line-height:1.5;margin-bottom:1rem}
+.visuel-question{
+  display:flex;justify-content:center;margin:-.2rem 0 1.1rem;
+  background:var(--fond);border-radius:12px;padding:.9rem;
+}
+.visuel-question-signe{width:90px}
+.visuel-question-signe svg{width:100%;height:auto;display:block}
+.visuel-question-scene{width:100%;max-width:420px}
+.visuel-question-scene svg{width:100%;height:auto;display:block;max-height:220px}
 .reponses{display:grid;gap:.6rem}
 .reponses button{
   text-align:left;background:var(--fond);border:2px solid var(--trait);border-radius:10px;

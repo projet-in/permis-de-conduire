@@ -103,8 +103,8 @@ const PANNEAUX = {
     <line x1="32" y1="52" x2="68" y2="52" stroke="var(--encre)" stroke-width="6"/>
   `),
   D1: rondObligation(`
-    <line x1="30" y1="70" x2="68" y2="32" stroke="#fff" stroke-width="8" stroke-linecap="round"/>
-    <polygon points="70,22 80,38 60,36" fill="#fff"/>
+    <line x1="30" y1="30" x2="68" y2="68" stroke="#fff" stroke-width="8" stroke-linecap="round"/>
+    <polygon points="70,78 80,62 60,64" fill="#fff"/>
   `),
   D5: rondObligation(`
     <circle cx="50" cy="50" r="20" fill="none" stroke="#fff" stroke-width="6"/>
@@ -649,4 +649,63 @@ function injecterVisuels(root){
       if(svg) svg.setAttribute("aria-label", legende ? legende.textContent.trim() : key);
     }
   });
+}
+
+// ===== Détection automatique du visuel pertinent pour une question (examen blanc) =====
+const CODES_PANNEAUX_DETECTABLES = ["F111","F87","F12a","F4a","F4b","B19","B21","B15","B11","B9","B5","B1",
+  "C45","C46","C35","C37","C23","C3","C1","D1","D5","E11","E9a","E9","E3","E1",
+  "F19","F1","F3","F5","F7","F9","A23","A15","A7","M2"];
+
+const SCENES_DETECTABLES = [
+  {re:/priorité de droite|priorit[ée].{0,25}(venant|vient|arrive).{0,20}droite|venant.{0,15}droite.{0,25}(garde|conserve|priorit)/i, scene:"priorite-droite"},
+  {re:/rond-point/i, scene:"rond-point"},
+  {re:/tourn(e|ez|ant)[a-z]* à gauche/i, scene:"tourner-gauche"},
+  {re:/tourn(e|ez|ant)[a-z]* à droite.{0,80}cyclist|cyclist.{0,80}tourn(e|ez|ant)[a-z]* à droite/i, scene:"tourner-droite-cycliste"},
+  {re:/angle mort/i, scene:"angle-mort-camion"},
+  {re:/écart latéral|dépasser (un |le )?cyclist/i, scene:"ecart-cycliste"},
+  {re:/règle des 2 secondes|distance de sécurité/i, scene:"distance-securite"},
+  {re:/distance d'arrêt|distance de freinage/i, scene:"distance-arret"},
+  {re:/radar tronçon/i, scene:"radar-troncon"},
+  {re:/portière|dutch reach|emporti[ée]r/i, scene:"ouverture-portiere"},
+  {re:/disque de stationnement|zone bleue/i, scene:"disque-stationnement"},
+  {re:/roues braqu[ée]es|en côte.{0,20}(frein à main|stationn)/i, scene:"stationnement-cote"},
+  {re:/couloir de secours/i, scene:"couloir-secours"},
+  {re:/\btirette\b/i, scene:"tirette"},
+  {re:/passage (pour )?pi[ée]tons?.{0,40}(priorité|engagé|traverse|s'apprête)/i, scene:"passage-pieton"},
+  {re:/véhicules? prioritaires?|sirène.{0,20}feux bleus|gyrophare/i, scene:"vehicule-prioritaire"},
+  {re:/visibilité insuffisante|sommet de côte/i, scene:"visibilite-insuffisante"},
+  {re:/triangle.{0,25}(panne|présignalisation|autoroute)|triangle de/i, scene:"triangle-autoroute"},
+  {re:/position latérale de sécurité|\bPLS\b/i, scene:"position-laterale-securite"},
+  {re:/siège.{0,25}(enfant|dos à la route).{0,40}airbag|airbag.{0,40}siège/i, scene:"siege-enfant-airbag"},
+  {re:/portée des feux|feux de croisement.{0,20}(portée|route)/i, scene:"feux-nuit"},
+];
+
+function detecterPanneau(texte){
+  if(/disque C3/i.test(texte)) return null; // faux positif connu : disque de signaleur, pas le signal routier C3
+  const idxC43 = texte.search(/C43\b/);
+  if(idxC43 !== -1){
+    const fenetre = texte.slice(Math.max(0, idxC43-25), idxC43+20);
+    const mNum = fenetre.match(/\b(\d{2,3})\b/);
+    if(mNum && PANNEAUX["C43_"+mNum[1]]) return "C43_"+mNum[1];
+    return "C43_50";
+  }
+  for(const code of CODES_PANNEAUX_DETECTABLES){
+    if(new RegExp("\\b"+code+"\\b").test(texte)) return code;
+  }
+  return null;
+}
+
+function detecterScene(texte){
+  for(const s of SCENES_DETECTABLES){
+    if(s.re.test(texte)) return s.scene;
+  }
+  return null;
+}
+
+function detecterVisuelQuestion(texte){
+  const scene = detecterScene(texte);
+  if(scene) return {type:"scene", valeur:scene};
+  const signe = detecterPanneau(texte);
+  if(signe) return {type:"signe", valeur:signe};
+  return null;
 }
