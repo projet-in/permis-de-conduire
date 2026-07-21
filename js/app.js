@@ -8,6 +8,9 @@ const THEMES = [
   {id:"alcool",         nom:"Alcool & sanctions", data:DATA_ALCOOL,   forme:"rond"},
   {id:"stationnement",  nom:"Stationnement", data:DATA_STATIONNEMENT, forme:"carre"},
   {id:"depassement",    nom:"Dépassement",   data:DATA_DEPASSEMENT,   forme:"rond"},
+  {id:"secourisme",     nom:"Secourisme",    data:DATA_SECOURISME,    forme:"rond"},
+  {id:"ecoconduite",    nom:"Écoconduite & chargement", data:DATA_ECOCONDUITE, forme:"carre"},
+  {id:"usagers-vulnerables", nom:"Usagers vulnérables", data:DATA_USAGERS_VULNERABLES, forme:"losange"},
 ];
 const ALL = THEMES.flatMap(t => t.data.map(q => ({...q, theme:t.id, themeNom:t.nom})));
 
@@ -523,6 +526,13 @@ function genererFicheMemo(){
           <li>50 questions — réussite à 41/50</li>
           <li>Erreur ordinaire : −1 — faute grave : −5</li>
           <li>Dès 17 ans — validité 3 ans</li>
+        </ul>
+        <h2>Essentiels à retenir</h2>
+        <ul>
+          <li>Urgence : 112 (partout en Europe)</li>
+          <li>Casque homologué obligatoire à moto/cyclo</li>
+          <li>Enfant &lt;1,35 m : dispositif de retenue obligatoire</li>
+          <li>Assurance RC + contrôle technique obligatoires</li>
         </ul>
       </div>
     </div>

@@ -7,10 +7,15 @@ Site statique d'entraînement au permis B théorique belge : cours, examen blanc
 - `manifest.json` — permet l'ajout du site à l'écran d'accueil sur mobile
 - `sw.js` — service worker : le site fonctionne hors ligne après une première visite
 - `css/style.css` — styles
-- `js/data-*.js` — banque de 206 questions (6 thèmes)
+- `js/data-*.js` — banque de 292 questions (9 thèmes)
 - `js/visuels.js` — bibliothèque de panneaux et scènes SVG (illustrations originales)
-- `js/cours.js` — contenu des 6 chapitres de cours
+- `js/cours.js` — contenu des 9 chapitres de cours
 - `js/app.js` — logique de l'application
+
+## Thèmes couverts
+Signalisation, priorités, vitesses, alcool & sanctions, stationnement, dépassement, secourisme & comportement en cas d'accident, écoconduite & chargement, usagers vulnérables & deux-roues.
+
+Ce n'est pas une reproduction littérale du texte légal complet du Code de la route belge (l'arrêté royal du 1/12/1975), mais une couverture large des thèmes réellement testés à l'examen théorique officiel.
 
 ## Fonctionnalités
 - Cours illustrés (47 panneaux, 22 mises en situation), examen blanc, flashcards

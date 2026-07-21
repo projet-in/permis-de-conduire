@@ -375,5 +375,146 @@ html:`
 <div class="signe-carte"><span class="signe-icone" data-signe="B19"></span><span class="signe-legende">B19 — vous cédez</span></div>
 <div class="signe-carte"><span class="signe-icone" data-signe="B21"></span><span class="signe-legende">B21 — vous êtes prioritaire</span></div>
 </div>
+`},
+{
+id:"secourisme", titre:"Secourisme & comportement en cas d'accident", forme:"rond",
+resume:"Protéger, alerter, secourir : les bons réflexes face à un accident ou une panne.",
+html:`
+<h3>1. Les 3 étapes : protéger, alerter, secourir</h3>
+<ol>
+<li><strong>Protéger</strong> : feux de détresse, gilet avant de sortir, triangle à bonne distance (±30 m / ±100 m sur autoroute), personne derrière la glissière.</li>
+<li><strong>Alerter</strong> : le <strong>112</strong>, numéro européen unique — lieu précis, nombre de victimes, état apparent.</li>
+<li><strong>Secourir</strong> : sans se mettre soi-même en danger, à la mesure de ses moyens.</li>
+</ol>
+<div class="exemple">💡 <strong>Exemple concret :</strong> accident sur autoroute → gilet avant de sortir, triangle à 100 m, tout le monde derrière la glissière, puis 112 avec le nombre de blessés et leur état.</div>
+<div class="scene-illustration"><div data-scene="triangle-autoroute"></div><p class="scene-legende">Sécuriser d'abord : gilet, triangle à bonne distance, et tout le monde derrière la glissière.</p></div>
+
+<h3>2. Face à une victime</h3>
+<ul>
+<li><strong>Consciente qui respire, hémorragie</strong> : compression directe et ferme de la plaie.</li>
+<li><strong>Inconsciente qui respire</strong> : position latérale de sécurité (PLS).</li>
+<li><strong>Ne respire plus</strong> : massage cardiaque si vous savez le faire, ou suivre les instructions du 112 ; utiliser un défibrillateur (DEA) à proximité si disponible — il guide vocalement.</li>
+<li><strong>Motard casqué inconscient</strong> : ne jamais retirer le casque sauf urgence vitale.</li>
+</ul>
+<div class="scene-illustration"><div data-scene="position-laterale-securite"></div><p class="scene-legende">Une victime inconsciente qui respire est placée en PLS, jamais laissée sur le dos sans surveillance.</p></div>
+<div class="galerie-panneaux">
+<div class="signe-carte"><span class="signe-icone" data-signe="casque"></span><span class="signe-legende">Casque : jamais retiré sauf urgence vitale</span></div>
+</div>
+
+<h3>3. Après un accident matériel</h3>
+<p>Sans blessé ni désaccord : un <strong>constat amiable</strong> suffit généralement, pas besoin de police systématiquement. Avec blessés, désaccord ou délit de fuite : la police doit intervenir.</p>
+
+<h3>4. Cas particuliers</h3>
+<ul>
+<li><strong>Incendie moteur</strong> : arrêter, couper le contact, évacuer, s'éloigner, alerter — ne jamais ouvrir le capot d'un moteur en feu.</li>
+<li><strong>Matières dangereuses (ADR)</strong> : rester à distance, ne pas fumer, transmettre le numéro affiché aux secours.</li>
+<li><strong>Véhicule dans l'eau</strong> : détacher la ceinture et sortir vite, avant que le véhicule ne s'enfonce.</li>
+<li><strong>Non-assistance à personne en danger</strong> : délit grave — chacun doit agir à la mesure de ses moyens.</li>
+</ul>
+<div class="exemple">💡 <strong>Exemple concret :</strong> un enfant est laissé seul dans une voiture en plein soleil quelques minutes à peine : la température intérieure peut devenir dangereuse en très peu de temps.</div>
+`},
+{
+id:"ecoconduite", titre:"Écoconduite, chargement & conditions particulières", forme:"carre",
+resume:"Chargement, documents obligatoires, éclairage, écoconduite et conduite par conditions difficiles.",
+html:`
+<h3>1. Chargement et remorques</h3>
+<ul>
+<li>Chargement <strong>réparti et arrimé</strong> : un centre de gravité trop haut ou mal réparti augmente le risque de renversement en virage.</li>
+<li>Dépassement à l'arrière &gt; 1 m : signalé par un dispositif ou tissu voyant.</li>
+<li>Permis B : ensemble (véhicule + remorque) jusqu'à <strong>3 500 kg</strong> de MMA totale ; au-delà, permis BE requis.</li>
+<li>Remorque &gt; 750 kg : ses propres feux et sa plaque d'immatriculation.</li>
+</ul>
+<div class="exemple">💡 <strong>Exemple concret :</strong> une remorque mal chargée à l'arrière (trop de poids derrière l'essieu) peut se mettre à louvoyer dangereusement (effet de fouet) à partir d'une certaine vitesse.</div>
+
+<h3>2. Documents et contrôle</h3>
+<ul>
+<li><strong>Assurance RC</strong> obligatoire : rouler sans elle expose à indemniser soi-même toutes les victimes.</li>
+<li><strong>Contrôle technique</strong> : généralement dès la 4<sup>e</sup> année pour une voiture particulière, puis périodique.</li>
+<li><strong>Certificat d'immatriculation</strong> : à bord ou consultable selon la réglementation en vigueur.</li>
+<li>Correction visuelle mentionnée sur le permis : lunettes/lentilles obligatoires pour conduire.</li>
+</ul>
+
+<h3>3. Éclairage et visibilité</h3>
+<ul>
+<li>Feux de croisement : la nuit, et dès que la visibilité est insuffisante (brouillard, forte pluie, tunnel).</li>
+<li>Antibrouillard arrière : uniquement si visibilité &lt; ±100 m — sinon, il éblouit inutilement.</li>
+<li>Pare-brise fissuré gênant la vue : à réparer, point de contrôle technique.</li>
+</ul>
+<div class="galerie-panneaux">
+<div class="signe-carte"><span class="signe-icone" data-signe="feu_rouge"></span><span class="signe-legende">Feux de croisement — nuit et visibilité réduite</span></div>
+</div>
+
+<h3>4. Conditions particulières</h3>
+<ul>
+<li><strong>Neige/verglas</strong> : vitesse fortement réduite, gestes doux, distances augmentées.</li>
+<li><strong>Vent latéral</strong> (viaducs, sorties de forêt) : volant ferme, allure réduite.</li>
+<li><strong>Canicule</strong> : jamais un enfant ou un animal seul dans le véhicule, même quelques minutes.</li>
+<li><strong>Tunnel</strong> : feux de croisement, distances respectées ; en cas de fumée, évacuer à pied par les issues de secours signalées.</li>
+</ul>
+<div class="scene-illustration"><div data-scene="feux-nuit"></div><p class="scene-legende">Adapter sa vitesse à la portée réelle de ses feux, surtout la nuit hors agglomération.</p></div>
+
+<h3>5. Écoconduite</h3>
+<ul>
+<li>Anticiper, changer de vitesse tôt, éviter les à-coups.</li>
+<li>Pression des pneus correcte : moins de consommation, meilleure adhérence.</li>
+<li>Couper le moteur en cas d'arrêt prolongé plutôt que de le laisser tourner inutilement.</li>
+</ul>
+`},
+{
+id:"usagers-vulnerables", titre:"Usagers vulnérables & deux-roues", forme:"losange",
+resume:"Piétons, cyclistes, motards, enfants : les règles et réflexes spécifiques à connaître.",
+html:`
+<h3>1. Piétons</h3>
+<ul>
+<li>Hors passage protégé (à moins de 30 m d'un passage) : le piéton cède, mais restez prudent.</li>
+<li>Personne à mobilité réduite : le temps nécessaire, sans précipitation imposée.</li>
+<li>Canne blanche/jaune ou chien-guide : déficience visuelle, égards particuliers.</li>
+<li>Sans trottoir : le piéton (landau, poussette) circule du côté le plus sûr ; adaptez votre conduite.</li>
+</ul>
+<div class="scene-illustration"><div data-scene="passage-pieton"></div><p class="scene-legende">Un piéton engagé ou sur le point de s'engager a priorité, même sans feux.</p></div>
+
+<h3>2. Cyclistes</h3>
+<ul>
+<li>Piste cyclable marquée existante : obligatoire pour le cycliste.</li>
+<li>Deux de front toléré, sauf gêne ; remise en file à l'approche d'un dépassement hors agglomération.</li>
+<li>Casque : non obligatoire pour un adulte à vélo (recommandé), contrairement au deux-roues motorisé.</li>
+<li>Nuit : feu avant blanc/jaune, feu arrière rouge, catadioptre.</li>
+<li>Sas vélo au feu rouge : les voitures s'arrêtent avant, cet espace leur est réservé.</li>
+<li>Ne jamais dépasser juste avant un carrefour ou un rond-point : attendez la sortie.</li>
+</ul>
+<div class="scene-illustration"><div data-scene="ecart-cycliste"></div><p class="scene-legende">L'écart latéral obligatoire pour dépasser un cycliste : 1 m en agglomération, 1,5 m hors agglomération.</p></div>
+<div class="galerie-panneaux">
+<div class="signe-carte"><span class="signe-icone" data-signe="F111"></span><span class="signe-legende">F111 — rue cyclable</span></div>
+</div>
+
+<h3>3. Motards et cyclomotoristes</h3>
+<ul>
+<li>Casque homologué <strong>obligatoire</strong>, conducteur et passager.</li>
+<li>Catégorie de permis spécifique selon l'âge et la cylindrée (ex. AM).</li>
+<li>Silhouette étroite : plus difficile à situer en distance/vitesse — vigilance accrue aux carrefours.</li>
+<li>Adhérence réduite par la pluie sur marquages et plaques d'égout : gardez vos distances.</li>
+</ul>
+<div class="galerie-panneaux">
+<div class="signe-carte"><span class="signe-icone" data-signe="casque"></span><span class="signe-legende">Casque homologué obligatoire</span></div>
+</div>
+
+<h3>4. Angle mort et tourner = céder</h3>
+<p>En tournant à droite, le cycliste qui continue tout droit sur la piste cyclable est prioritaire — c'est le scénario d'accident le plus fréquent en ville. Contrôlez toujours l'angle mort avant de tourner.</p>
+<div class="scene-illustration"><div data-scene="angle-mort-camion"></div><p class="scene-legende">Ne restez jamais dans l'angle mort d'un véhicule, surtout à son flanc droit.</p></div>
+
+<h3>5. Enfants et transport</h3>
+<ul>
+<li>Moins d'1,35 m : dispositif de retenue adapté obligatoire, sur tout trajet.</li>
+<li>Siège dos à la route à l'avant : airbag frontal obligatoirement désactivé.</li>
+</ul>
+<div class="scene-illustration"><div data-scene="siege-enfant-airbag"></div><p class="scene-legende">Un siège dos à la route à l'avant impose la désactivation de l'airbag frontal, sous peine de danger grave pour l'enfant.</p></div>
+
+<h3>6. Transports en commun et groupes</h3>
+<ul>
+<li>Bus/tram quittant l'arrêt : facilitez sa réinsertion.</li>
+<li>Bus scolaire à l'arrêt, feux de détresse : ralentir au pas, un enfant peut surgir.</li>
+<li>Cortèges et groupes cyclistes encadrés : interdiction de les couper.</li>
+</ul>
+<div class="scene-illustration"><div data-scene="vehicule-prioritaire"></div><p class="scene-legende">Sirène et feux bleus : dégagez immédiatement, quitte à vous arrêter sur le côté.</p></div>
 `}
 ];

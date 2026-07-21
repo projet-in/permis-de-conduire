@@ -206,6 +206,11 @@ const PANNEAUX = {
     <rect x="4" y="42" width="92" height="16" fill="var(--gris)" opacity="0.25"/>
     <polygon points="96,50 76,40 76,60" fill="var(--rouge)"/>
   `),
+  casque: svgWrap(`
+    <path d="M15,60 A35,35 0 0 1 85,60 L85,72 L15,72 Z" fill="var(--bleu)" stroke="#fff" stroke-width="3"/>
+    <rect x="60" y="52" width="26" height="16" rx="5" fill="#8FA0BC" stroke="#fff" stroke-width="2"/>
+    <rect x="15" y="72" width="70" height="10" rx="4" fill="var(--encre)"/>
+  `),
 };
 
 const SCENES = {
@@ -596,6 +601,31 @@ const SCENES = {
       <rect x="-20" y="-15" width="40" height="30" rx="8" fill="var(--rouge)"/>
     </g>
     <text x="150" y="230" text-anchor="middle" font-size="13" font-weight="800" fill="var(--bleu)">Ne dépassez pas : visibilité insuffisante</text>
+  </svg>`,
+
+  "position-laterale-securite": `<svg viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg" font-family="Arial,sans-serif">
+    <rect width="400" height="240" fill="#E4E9F0"/>
+    <ellipse cx="200" cy="200" rx="160" ry="14" fill="#B7C1D1" opacity="0.6"/>
+    <circle cx="90" cy="120" r="16" fill="var(--encre)"/>
+    <path d="M104,124 Q170,110 230,130 Q270,142 290,160" fill="none" stroke="var(--encre)" stroke-width="14" stroke-linecap="round"/>
+    <path d="M230,130 Q235,155 210,175" fill="none" stroke="var(--encre)" stroke-width="10" stroke-linecap="round"/>
+    <path d="M290,160 Q300,180 285,200" fill="none" stroke="var(--encre)" stroke-width="10" stroke-linecap="round"/>
+    <path d="M104,120 Q140,95 175,108" fill="none" stroke="var(--encre)" stroke-width="9" stroke-linecap="round"/>
+    <text x="200" y="30" text-anchor="middle" font-size="14" font-weight="800" fill="var(--encre)">Position latérale de sécurité (PLS)</text>
+    <text x="200" y="222" text-anchor="middle" font-size="12" fill="var(--gris)">Tête légèrement basculée pour dégager les voies respiratoires</text>
+  </svg>`,
+
+  "siege-enfant-airbag": `<svg viewBox="0 0 400 260" xmlns="http://www.w3.org/2000/svg" font-family="Arial,sans-serif">
+    <rect width="400" height="260" fill="#E4E9F0"/>
+    <rect x="60" y="40" width="280" height="160" rx="18" fill="var(--bleu)" opacity="0.15"/>
+    <rect x="110" y="70" width="120" height="110" rx="16" fill="var(--bleu)"/>
+    <circle cx="170" cy="110" r="20" fill="#fff" opacity="0.9"/>
+    <rect x="250" y="60" width="60" height="18" rx="4" fill="var(--rouge)"/>
+    <line x1="252" y1="63" x2="308" y2="75" stroke="#fff" stroke-width="3"/>
+    <line x1="308" y1="63" x2="252" y2="75" stroke="#fff" stroke-width="3"/>
+    <text x="280" y="50" text-anchor="middle" font-size="11" font-weight="800" fill="var(--rouge)">AIRBAG OFF</text>
+    <text x="170" y="210" text-anchor="middle" font-size="13" font-weight="800" fill="var(--encre)">Siège dos à la route</text>
+    <text x="170" y="228" text-anchor="middle" font-size="12" fill="var(--gris)">= airbag frontal désactivé obligatoirement</text>
   </svg>`,
 };
 
