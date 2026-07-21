@@ -70,6 +70,8 @@
         <span class="cta">Réviser en flash →</span>
       </button>
     </div>
+
+    <div id="zone-points-faibles"></div>
   </section>
 
   <!-- ============ COURS ============ -->
@@ -85,8 +87,11 @@
 
 <footer>
   Outil d'entraînement <b>non officiel</b>, à but pédagogique uniquement.<br>
-  Réfère-toi toujours au Code de la route belge (arrêté royal du 1<sup>er</sup> décembre 1975) et aux supports officiels de ton auto-école.
+  Réfère-toi toujours au Code de la route belge (arrêté royal du 1<sup>er</sup> décembre 1975) et aux supports officiels de ton auto-école.<br>
+  <button class="lien-fiche" id="btn-fiche" type="button">🖨️ Imprimer une fiche mémo (A4)</button>
 </footer>
+
+<div id="fiche-imprimable" class="fiche-print" aria-hidden="true"></div>
 
 <script src="js/data-signalisation.js"></script>
 <script src="js/data-priorites.js"></script>
@@ -97,5 +102,12 @@
 <script src="js/visuels.js"></script>
 <script src="js/cours.js"></script>
 <script src="js/app.js"></script>
+<script>
+if("serviceWorker" in navigator){
+  window.addEventListener("load", ()=>{
+    navigator.serviceWorker.register("sw.js").catch(()=>{});
+  });
+}
+</script>
 </body>
 </html>

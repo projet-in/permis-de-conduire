@@ -5,11 +5,20 @@ Site statique d'entraînement au permis B théorique belge : cours, examen blanc
 ## Contenu
 - `index.html` — page unique (SPA)
 - `manifest.json` — permet l'ajout du site à l'écran d'accueil sur mobile
+- `sw.js` — service worker : le site fonctionne hors ligne après une première visite
 - `css/style.css` — styles
 - `js/data-*.js` — banque de 206 questions (6 thèmes)
 - `js/visuels.js` — bibliothèque de panneaux et scènes SVG (illustrations originales)
 - `js/cours.js` — contenu des 6 chapitres de cours
 - `js/app.js` — logique de l'application
+
+## Fonctionnalités
+- Cours illustrés (47 panneaux, 22 mises en situation), examen blanc, flashcards
+- Recherche par mot-clé dans les cours
+- Suivi de progression par thème (cumulé entre les sessions, dans le navigateur)
+- Fiche mémo imprimable en A4 (bouton en bas de page)
+- Fonctionne hors connexion une fois visité une première fois
+- Raccourcis clavier en flashcards : espace (retourner), 1/2 ou flèches (marquer)
 
 Aucune dépendance, aucun build : uniquement HTML/CSS/JS vanilla.
 

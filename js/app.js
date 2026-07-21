@@ -24,6 +24,7 @@ function allerA(vue){
   if(vue==="cours") renderListeChapitres();
   if(vue==="examen" && !examEnCours) renderConfigExam();
   if(vue==="flash" && !flashEnCours) renderChoixThemes();
+  if(vue==="accueil") renderPointsFaibles();
 }
 document.querySelectorAll("nav button[data-vue]").forEach(b=>{
   b.addEventListener("click", ()=>allerA(b.dataset.vue));
@@ -49,7 +50,8 @@ function renderListeChapitres(){
   el.innerHTML = `
     <h2 class="titre-vue">Cours théoriques</h2>
     <p class="sous-titre">6 chapitres, avec exemples concrets, pour comprendre avant de s'entraîner.</p>
-    <div class="liste-chapitres">
+    <input type="search" class="recherche-cours" id="recherche-cours" placeholder="🔎 Rechercher un mot-clé (ex. STOP, alcool, rond-point...)">
+    <div class="liste-chapitres" id="liste-chapitres">
       ${COURS.map((c,i)=>`
         <button class="chapitre-item" data-chap="${i}">
           <span class="panneau p-${c.forme}" aria-hidden="true">${c.forme==='carre'?'B':''}</span>
@@ -61,9 +63,22 @@ function renderListeChapitres(){
         </button>
       `).join("")}
     </div>
+    <p class="aucun-resultat" id="aucun-resultat" style="display:none">Aucun chapitre ne correspond à cette recherche.</p>
   `;
   el.querySelectorAll("[data-chap]").forEach(b=>{
     b.addEventListener("click", ()=>renderChapitre(parseInt(b.dataset.chap)));
+  });
+  document.getElementById("recherche-cours").addEventListener("input", (e)=>{
+    const q = e.target.value.trim().toLowerCase();
+    let visibles = 0;
+    document.querySelectorAll("#liste-chapitres [data-chap]").forEach(b=>{
+      const c = COURS[parseInt(b.dataset.chap)];
+      const texte = (c.titre+" "+c.resume+" "+c.html).toLowerCase();
+      const match = q==="" || texte.includes(q);
+      b.style.display = match ? "" : "none";
+      if(match) visibles++;
+    });
+    document.getElementById("aucun-resultat").style.display = visibles===0 ? "block" : "none";
   });
 }
 
@@ -215,6 +230,16 @@ function finirExamen(){
   const reussi = score >= 41;
   const erreurs = examReponses.filter(r=>!r.correct);
 
+  // Détail par thème (cette session)
+  const parTheme = {};
+  examReponses.forEach(r=>{
+    const t = r.q.theme;
+    if(!parTheme[t]) parTheme[t] = {nom:r.q.themeNom, correct:0, total:0};
+    parTheme[t].total++;
+    if(r.correct) parTheme[t].correct++;
+  });
+  enregistrerStatsThemes(parTheme);
+
   const el = document.getElementById("vue-examen");
   el.innerHTML = `
     <div class="resultat">
@@ -224,6 +249,20 @@ function finirExamen(){
       <div class="detail-fautes">
         <div>Erreurs ordinaires<br><b>${erreursOrdinaires}</b></div>
         <div class="g">Fautes graves<br><b>${fautesGraves}</b></div>
+      </div>
+      <div class="panneau-faibles">
+        <h4>Détail par thème (cette session)</h4>
+        <div class="progression-themes">
+          ${Object.values(parTheme).map(t=>{
+            const pct = Math.round((t.correct/t.total)*100);
+            const couleur = pct>=80 ? "var(--vert)" : (pct>=60 ? "var(--jaune)" : "var(--rouge)");
+            return `<div class="barre-theme">
+              <span class="nom">${t.nom}</span>
+              <span class="piste"><span class="remplissage" style="width:${pct}%;background:${couleur}"></span></span>
+              <span class="pct">${t.correct}/${t.total}</span>
+            </div>`;
+          }).join("")}
+        </div>
       </div>
       <div class="actions-resultat">
         <button class="btn jaune" id="btn-recommencer">Recommencer un examen</button>
@@ -256,6 +295,54 @@ function finirExamen(){
     const best = parseInt(localStorage.getItem("permisb-meilleur-score")||"0");
     if(score > best) localStorage.setItem("permisb-meilleur-score", String(score));
   }catch(e){}
+}
+
+// --- Suivi de progression par thème (cumulé, localStorage) ---
+function enregistrerStatsThemes(parTheme){
+  try{
+    const brut = localStorage.getItem("permisb-stats-themes");
+    const cumul = brut ? JSON.parse(brut) : {};
+    Object.keys(parTheme).forEach(t=>{
+      if(!cumul[t]) cumul[t] = {nom:parTheme[t].nom, correct:0, total:0};
+      cumul[t].correct += parTheme[t].correct;
+      cumul[t].total += parTheme[t].total;
+    });
+    localStorage.setItem("permisb-stats-themes", JSON.stringify(cumul));
+  }catch(e){}
+}
+
+function lirePointsFaibles(){
+  try{
+    const brut = localStorage.getItem("permisb-stats-themes");
+    if(!brut) return [];
+    const cumul = JSON.parse(brut);
+    return Object.values(cumul)
+      .filter(t=>t.total>=3)
+      .map(t=>({...t, pct:Math.round((t.correct/t.total)*100)}))
+      .sort((a,b)=>a.pct-b.pct);
+  }catch(e){ return []; }
+}
+
+function renderPointsFaibles(){
+  const zone = document.getElementById("zone-points-faibles");
+  if(!zone) return;
+  const stats = lirePointsFaibles();
+  if(!stats.length){ zone.innerHTML = ""; return; }
+  zone.innerHTML = `
+    <div class="panneau-faibles">
+      <h4>Votre progression cumulée par thème</h4>
+      <div class="progression-themes">
+        ${stats.map(t=>{
+          const couleur = t.pct>=80 ? "var(--vert)" : (t.pct>=60 ? "var(--jaune)" : "var(--rouge)");
+          return `<div class="barre-theme">
+            <span class="nom">${t.nom}</span>
+            <span class="piste"><span class="remplissage" style="width:${t.pct}%;background:${couleur}"></span></span>
+            <span class="pct">${t.pct}%</span>
+          </div>`;
+        }).join("")}
+      </div>
+    </div>
+  `;
 }
 
 // ========================================================
@@ -373,6 +460,79 @@ function finirFlash(){
   el.querySelector("[data-goto]").addEventListener("click", ()=>allerA("accueil"));
   document.getElementById("btn-refaire").addEventListener("click", renderChoixThemes);
 }
+
+// ========================================================
+// FICHE MÉMO IMPRIMABLE (A4)
+// ========================================================
+function genererFicheMemo(){
+  const zone = document.getElementById("fiche-imprimable");
+  zone.innerHTML = `
+    <h1>Permis B Théorique — Fiche mémo</h1>
+    <div class="colonnes">
+      <div>
+        <h2>Vitesses maximales</h2>
+        <table>
+          <tr><th>Lieu</th><th>Limite</th></tr>
+          <tr><td>Zone résidentielle</td><td>20 km/h</td></tr>
+          <tr><td>Zone 30 / abords d'école</td><td>30 km/h</td></tr>
+          <tr><td>Agglomération</td><td>50 km/h</td></tr>
+          <tr><td>Hors agglo — Flandre</td><td>70 km/h</td></tr>
+          <tr><td>Hors agglo — Wallonie</td><td>90 km/h</td></tr>
+          <tr><td>Autoroute / 2×2 séparées</td><td>120 km/h (min. 70)</td></tr>
+        </table>
+        <h2>Distances clés</h2>
+        <ul>
+          <li>Réaction ≈ 1 s → 50 km/h : 14 m ; 120 km/h : 33 m</li>
+          <li>Arrêt à 50 km/h (sol sec) ≈ 27 m</li>
+          <li>Sécurité : 2 s (4 s pluie/nuit)</li>
+          <li>Triangle panne : 30 m (route) / 100 m (autoroute)</li>
+          <li>Feux croisement ≈65 m — feux route ≈100–200 m</li>
+        </ul>
+        <h2>Stationnement</h2>
+        <ul>
+          <li>5 m avant un carrefour / passage piéton</li>
+          <li>15 m autour d'un arrêt de bus/tram</li>
+          <li>E1 = stationnement interdit · E3 = arrêt + stationnement interdits</li>
+          <li>Zone bleue : disque, max 2 h</li>
+        </ul>
+      </div>
+      <div>
+        <h2>Alcool</h2>
+        <table>
+          <tr><th>Taux</th><th>Conséquence</th></tr>
+          <tr><td>0,5–0,8 g/l</td><td>3 h + 179 €</td></tr>
+          <tr><td>≥0,8 g/l</td><td>6 h + tribunal</td></tr>
+          <tr><td>≥1,5 g/l</td><td>Retrait 15 j possible</td></tr>
+          <tr><td>≥1,8 g/l</td><td>Alcolock</td></tr>
+        </table>
+        <h2>4 degrés d'infraction</h2>
+        <table>
+          <tr><th>Degré</th><th>Perception</th></tr>
+          <tr><td>1er</td><td>≈58 €</td></tr>
+          <tr><td>2e</td><td>≈116 €</td></tr>
+          <tr><td>3e</td><td>≈174 €</td></tr>
+          <tr><td>4e</td><td>≈473 € + citation</td></tr>
+        </table>
+        <h2>Dépassement</h2>
+        <ul>
+          <li>Écart cycliste : 1 m (agglo) / 1,5 m (hors agglo)</li>
+          <li>Interdit : carrefour (sauf priorité/agent/feux), virage/côte sans visibilité, passage à niveau, passage piéton</li>
+        </ul>
+        <h2>Examen théorique</h2>
+        <ul>
+          <li>50 questions — réussite à 41/50</li>
+          <li>Erreur ordinaire : −1 — faute grave : −5</li>
+          <li>Dès 17 ans — validité 3 ans</li>
+        </ul>
+      </div>
+    </div>
+    <p class="pied">Fiche générée depuis le site d'entraînement Permis B Théorique — outil non officiel, à but pédagogique. Réfère-toi au Code de la route belge.</p>
+  `;
+  window.print();
+}
+
+const btnFiche = document.getElementById("btn-fiche");
+if(btnFiche) btnFiche.addEventListener("click", genererFicheMemo);
 
 // --- Raccourcis clavier (flashcards) ---
 document.addEventListener("keydown", (e)=>{

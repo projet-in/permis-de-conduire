@@ -47,6 +47,17 @@ html:`
 <div class="signe-carte"><span class="signe-icone" data-signe="C23"></span><span class="signe-legende">C23 — camions interdits</span></div>
 <div class="signe-carte"><span class="signe-icone" data-signe="D1"></span><span class="signe-legende">D1 — contournement obligatoire</span></div>
 </div>
+<p style="font-size:.9rem;color:var(--gris);margin-bottom:.3rem">Panneaux d'indication (série F) — début et fin de zone :</p>
+<div class="galerie-panneaux">
+<div class="signe-carte"><span class="signe-icone" data-signe="F4b"></span><span class="signe-legende">F4b — fin de zone 30</span></div>
+<div class="signe-carte"><span class="signe-icone" data-signe="F7"></span><span class="signe-legende">F7 — fin d'autoroute</span></div>
+<div class="signe-carte"><span class="signe-icone" data-signe="F111"></span><span class="signe-legende">F111 — rue cyclable</span></div>
+<div class="signe-carte"><span class="signe-icone" data-signe="F87"></span><span class="signe-legende">F87 — dispositif surélevé</span></div>
+<div class="signe-carte"><span class="signe-icone" data-signe="A7"></span><span class="signe-legende">A7 — priorité de droite annoncée</span></div>
+<div class="signe-carte"><span class="signe-icone" data-signe="C3"></span><span class="signe-legende">C3 — circulation interdite (2 sens)</span></div>
+<div class="signe-carte"><span class="signe-icone" data-signe="C45"></span><span class="signe-legende">C45 — fin de limitation</span></div>
+<div class="signe-carte"><span class="signe-icone" data-signe="C46"></span><span class="signe-legende">C46 — fin d'interdiction</span></div>
+</div>
 
 <h3>3. Portée d'un signal</h3>
 <p>Une interdiction classique vaut <strong>du signal jusqu'au prochain carrefour</strong> (ou jusqu'au signal de fin). Un signal <strong>zonal</strong> (« zone 30 », « zone P disque ») vaut dans tout le périmètre, rue après rue, jusqu'au panneau de <strong>fin de zone</strong>.</p>
@@ -120,6 +131,7 @@ html:`
 <li>Vous <strong>tournez</strong> (gauche ou droite) → cédez aux <strong>piétons et cyclistes</strong> qui continuent tout droit, y compris sur piste cyclable.</li>
 </ul>
 <div class="exemple">💡 <strong>Exemple concret :</strong> vous tournez à droite vers le zoning ; un cycliste sur la piste cyclable file tout droit le long de la route. Contrôle d'angle mort droit → il passe d'abord.</div>
+<div class="scene-illustration"><div data-scene="tourner-droite-cycliste"></div><p class="scene-legende">Même logique en tournant à droite : le cycliste qui continue tout droit sur la piste cyclable est prioritaire.</p></div>
 <div class="scene-illustration"><div data-scene="tourner-gauche"></div><p class="scene-legende">Le classique accident de carrefour : en tournant à gauche, vous coupez la trajectoire du trafic venant en face.</p></div>
 
 <h3>5. Les manœuvres</h3>
@@ -134,6 +146,9 @@ html:`
 <li><strong>Cortèges et groupes encadrés</strong> : interdiction de les couper.</li>
 <li><strong>Tirette</strong> : obligatoire en circulation fortement ralentie — insertion alternée au rétrécissement. <strong>Couloir de secours</strong> : entre la bande de gauche et sa voisine dès que le trafic se fige.</li>
 </ul>
+<div class="scene-illustration"><div data-scene="vehicule-prioritaire"></div><p class="scene-legende">Sirène et feux bleus : dégagez immédiatement, quitte à vous arrêter sur le côté.</p></div>
+<div class="scene-illustration"><div data-scene="passage-pieton"></div><p class="scene-legende">Un piéton engagé ou sur le point de s'engager a priorité, même sans feux.</p></div>
+<div class="scene-illustration"><div data-scene="tirette"></div><p class="scene-legende">La tirette : on utilise les deux bandes jusqu'au rétrécissement, puis on s'insère un véhicule à la fois.</p></div>
 <div class="scene-illustration"><div data-scene="couloir-secours"></div><p class="scene-legende">Dès que le trafic se fige, chacun serre son côté pour laisser un couloir aux secours — jamais l'inverse.</p></div>
 `},
 {
@@ -156,6 +171,8 @@ html:`
 <div class="signe-carte"><span class="signe-icone" data-signe="C43_30"></span><span class="signe-legende">C43 — 30 km/h</span></div>
 <div class="signe-carte"><span class="signe-icone" data-signe="C43_50"></span><span class="signe-legende">C43 — 50 km/h</span></div>
 <div class="signe-carte"><span class="signe-icone" data-signe="C43_70"></span><span class="signe-legende">C43 — 70 km/h</span></div>
+<div class="signe-carte"><span class="signe-icone" data-signe="C43_90"></span><span class="signe-legende">C43 — 90 km/h</span></div>
+<div class="signe-carte"><span class="signe-icone" data-signe="C43_120"></span><span class="signe-legende">C43 — 120 km/h</span></div>
 </div>
 
 <h3>2. La vitesse adaptée</h3>
@@ -171,6 +188,8 @@ html:`
 </ul>
 <div class="exemple">💡 <strong>Exemple concret :</strong> à 120 km/h, consulter 2 secondes son GPS = 66 m parcourus en aveugle — la longueur d'un terrain de football sur sa moitié.</div>
 <div class="scene-illustration"><div data-scene="distance-arret"></div><p class="scene-legende">Plus la vitesse augmente, plus la distance de freinage grandit vite : elle est multipliée par 4 quand la vitesse double.</p></div>
+<div class="scene-illustration"><div data-scene="distance-securite"></div><p class="scene-legende">La règle des 2 secondes pour garder une distance de sécurité suffisante avec le véhicule qui précède.</p></div>
+<div class="scene-illustration"><div data-scene="feux-nuit"></div><p class="scene-legende">La nuit, adaptez votre vitesse à la portée réelle de vos feux.</p></div>
 
 <h3>4. Sanctions vitesse</h3>
 <ul>
@@ -179,6 +198,7 @@ html:`
 <li><strong>Radar tronçon</strong> = vitesse moyenne : ralentir au portique ne sert à rien.</li>
 <li>Les limites affichées sur <strong>panneaux dynamiques</strong> (portiques autoroutiers) ont pleine valeur légale.</li>
 </ul>
+<div class="scene-illustration"><div data-scene="radar-troncon"></div><p class="scene-legende">Le radar tronçon calcule une moyenne : inutile de ralentir juste avant le second point de mesure.</p></div>
 
 <h3>5. Cas particuliers</h3>
 <ul>
@@ -242,6 +262,7 @@ html:`
 <li>Triangle : ±30 m (route), <strong>±100 m sur autoroute</strong> ; gilet rétroréfléchissant pour quitter le véhicule ; occupants <strong>derrière la glissière</strong>.</li>
 <li>Fatigue : aux premiers signes, pause + micro-sieste 15–20 min. Jamais de moteur tournant dans un local fermé (CO mortel).</li>
 </ul>
+<div class="scene-illustration"><div data-scene="triangle-autoroute"></div><p class="scene-legende">En panne : triangle à bonne distance, gilet, et tout le monde derrière la glissière de sécurité.</p></div>
 `},
 {
 id:"stationnement", titre:"Arrêt & stationnement", forme:"carre",
@@ -259,6 +280,7 @@ html:`
 <li>En côte : frein à main + vitesse engagée (ou P) + roues braquées vers la bordure.</li>
 <li>Nuit, chaussée non éclairée : feux de position du côté circulation.</li>
 </ul>
+<div class="scene-illustration"><div data-scene="stationnement-cote"></div><p class="scene-legende">En côte, les roues braquées vers la bordure empêchent le véhicule de dévaler en cas de défaillance du frein.</p></div>
 
 <h3>3. Les interdictions à connaître par cœur</h3>
 <table>
@@ -277,11 +299,12 @@ html:`
 <h3>4. Zones et signaux</h3>
 <ul>
 <li><strong>Zone bleue</strong> : disque obligatoire, max 2 h en général, jours ouvrables 9 h–18 h par défaut.</li>
-<li><strong>E9 (P bleu)</strong> : stationnement organisé — lisez l'additionnel (payant, riverains, électrique en charge, livraisons…).</li>
+<li><strong>E9 / E9a (P bleu)</strong> : stationnement organisé — lisez l'additionnel (payant, riverains, électrique en charge, livraisons…).</li>
 <li><strong>E11</strong> : alterné semi-mensuel — du 1 au 15 côté <strong>impair</strong>, du 16 à la fin côté <strong>pair</strong> ; changement le dernier jour de la période entre 19h30 et 20h.</li>
 <li><strong>Place handicapés</strong> sans carte : 2e degré + dépannage à vos frais.</li>
 <li>Emplacements réservés (recharge élec., taxis, kiss &amp; ride, covoiturage) : condition affichée à respecter.</li>
 </ul>
+<div class="scene-illustration"><div data-scene="disque-stationnement"></div><p class="scene-legende">Le disque : flèche sur le trait qui suit l'heure d'arrivée, pour une durée maximale de 2 h en zone bleue.</p></div>
 
 <h3>5. Réflexes de sécurité</h3>
 <ul>
@@ -290,6 +313,7 @@ html:`
 <li>Jamais de double file devant une école : elle masque les enfants qui traversent.</li>
 <li>Moteur coupé à l'arrêt ; remorque non attelée : max 24 h au même endroit ; mal stationné = amende <strong>+ dépannage à vos frais</strong>.</li>
 </ul>
+<div class="scene-illustration"><div data-scene="ouverture-portiere"></div><p class="scene-legende">La main opposée force la rotation du buste et le contrôle naturel de l'angle mort avant d'ouvrir.</p></div>
 `},
 {
 id:"depassement", titre:"Dépassement & croisement", forme:"rond",
@@ -314,6 +338,7 @@ html:`
 <li>Signal <strong>C35</strong> : interdiction de dépasser les véhicules à plus de 2 roues (C37 : fin).</li>
 <li>Par précipitations : les <strong>+7,5 t</strong> ne dépassent pas sur autoroute.</li>
 </ul>
+<div class="scene-illustration"><div data-scene="visibilite-insuffisante"></div><p class="scene-legende">Sommet de côte ou virage : si vous ne voyez pas assez loin, le dépassement est interdit.</p></div>
 <div class="exemple">💡 <strong>Exemple concret :</strong> la voiture devant vous freine à hauteur d'un passage piéton apparemment vide. Ne déboîtez pas : elle voit peut-être un enfant que vous ne voyez pas. C'est l'accident-type mortel en agglomération.</div>
 <div class="galerie-panneaux">
 <div class="signe-carte"><span class="signe-icone" data-signe="C35"></span><span class="signe-legende">C35 — dépassement interdit</span></div>
@@ -325,7 +350,7 @@ html:`
 <h3>3. Dépasser les usagers vulnérables</h3>
 <ul>
 <li>Écart latéral cycliste/trottinette : <strong>1 m en agglomération, 1,5 m hors agglomération</strong> — sinon, on attend derrière.</li>
-<li><strong>Rue cyclable (F111)</strong> : interdiction totale de dépasser un cycliste, max 30 km/h.</li>
+<li><strong>Rue cyclable (F111)</strong> <span class="signe-inline" data-signe="F111"></span>: interdiction totale de dépasser un cycliste, max 30 km/h.</li>
 <li>Bus à l'arrêt feux de détresse (enfants) : croiser/dépasser au pas, prêt à s'arrêter.</li>
 <li>Camions : si vous ne voyez pas ses rétroviseurs, le chauffeur ne vous voit pas. Ne stationnez jamais le long de son flanc droit en approche de carrefour.</li>
 </ul>

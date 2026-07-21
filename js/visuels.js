@@ -86,6 +86,22 @@ const PANNEAUX = {
   C43_30: panneauVitesse(30),
   C43_50: panneauVitesse(50),
   C43_70: panneauVitesse(70),
+  C43_90: panneauVitesse(90),
+  C43_120: panneauVitesse(120),
+  C3: svgWrap(`<circle cx="50" cy="50" r="44" fill="var(--rouge)" stroke="#fff" stroke-width="4"/>`),
+  C45: svgWrap(`
+    <circle cx="50" cy="50" r="44" fill="#fff" stroke="var(--gris)" stroke-width="6"/>
+    <text x="50" y="62" text-anchor="middle" font-size="28" font-weight="800" fill="var(--gris)" font-family="Arial,sans-serif" opacity="0.65">70</text>
+    <line x1="12" y1="88" x2="88" y2="12" stroke="var(--gris)" stroke-width="5"/>
+  `),
+  C46: svgWrap(`
+    <circle cx="50" cy="50" r="44" fill="#fff" stroke="var(--gris)" stroke-width="6"/>
+    <line x1="12" y1="88" x2="88" y2="12" stroke="var(--gris)" stroke-width="5"/>
+  `),
+  A7: triangleDanger(`
+    <line x1="50" y1="35" x2="50" y2="70" stroke="var(--encre)" stroke-width="6"/>
+    <line x1="32" y1="52" x2="68" y2="52" stroke="var(--encre)" stroke-width="6"/>
+  `),
   D1: rondObligation(`
     <line x1="30" y1="70" x2="68" y2="32" stroke="#fff" stroke-width="8" stroke-linecap="round"/>
     <polygon points="70,22 80,38 60,36" fill="#fff"/>
@@ -104,6 +120,7 @@ const PANNEAUX = {
     <line x1="18" y1="18" x2="82" y2="82" stroke="var(--rouge)" stroke-width="8"/>
   `),
   E9: carreIndication(`<text x="50" y="68" text-anchor="middle" font-size="50" font-weight="800" fill="#fff" font-family="Arial,sans-serif">P</text>`),
+  E9a: carreIndication(`<text x="50" y="68" text-anchor="middle" font-size="50" font-weight="800" fill="#fff" font-family="Arial,sans-serif">P</text>`),
   E11: carreIndication(`
     <text x="50" y="58" text-anchor="middle" font-size="36" font-weight="800" fill="#fff" font-family="Arial,sans-serif">P</text>
     <text x="50" y="79" text-anchor="middle" font-size="11" font-weight="700" fill="#fff" font-family="Arial,sans-serif">1↔15 / 16↔31</text>
@@ -111,6 +128,19 @@ const PANNEAUX = {
   F5: carreIndication(`
     <path d="M20 70 L20 55 Q50 30 80 55 L80 70" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/>
     <line x1="20" y1="70" x2="80" y2="70" stroke="#fff" stroke-width="6"/>
+  `),
+  F7: carreIndication(`
+    <path d="M20 70 L20 55 Q50 30 80 55 L80 70" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" opacity="0.55"/>
+    <line x1="20" y1="70" x2="80" y2="70" stroke="#fff" stroke-width="6" opacity="0.55"/>
+    <line x1="14" y1="86" x2="86" y2="14" stroke="var(--encre)" stroke-width="6"/>
+  `),
+  F87: triangleDanger(`<path d="M15,65 Q35,40 50,40 Q65,40 85,65" fill="none" stroke="var(--encre)" stroke-width="5" stroke-linecap="round"/>`),
+  F111: carreIndication(`
+    <circle cx="34" cy="62" r="10" fill="none" stroke="#fff" stroke-width="5"/>
+    <circle cx="66" cy="62" r="10" fill="none" stroke="#fff" stroke-width="5"/>
+    <line x1="34" y1="62" x2="50" y2="40" stroke="#fff" stroke-width="5"/>
+    <line x1="50" y1="40" x2="66" y2="62" stroke="#fff" stroke-width="5"/>
+    <line x1="50" y1="40" x2="42" y2="62" stroke="#fff" stroke-width="5"/>
   `),
   F9: carreIndication(`
     <rect x="24" y="46" width="52" height="18" rx="8" fill="#fff"/>
@@ -138,6 +168,12 @@ const PANNEAUX = {
     <text x="50" y="30" text-anchor="middle" font-size="13" font-weight="800" fill="#fff" font-family="Arial,sans-serif">ZONE</text>
     <circle cx="50" cy="62" r="26" fill="#fff" stroke="var(--rouge)" stroke-width="6"/>
     <text x="50" y="72" text-anchor="middle" font-size="26" font-weight="800" fill="var(--encre)" font-family="Arial,sans-serif">30</text>
+  `),
+  F4b: carreIndication(`
+    <text x="50" y="30" text-anchor="middle" font-size="13" font-weight="800" fill="#fff" font-family="Arial,sans-serif" opacity="0.6">ZONE</text>
+    <circle cx="50" cy="62" r="26" fill="#fff" stroke="var(--gris)" stroke-width="6" opacity="0.7"/>
+    <text x="50" y="72" text-anchor="middle" font-size="26" font-weight="800" fill="var(--gris)" font-family="Arial,sans-serif">30</text>
+    <line x1="26" y1="86" x2="74" y2="38" stroke="#fff" stroke-width="5"/>
   `),
   A15: triangleDanger(`<polyline points="25,60 40,45 50,60 60,45 75,60" fill="none" stroke="var(--encre)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>`),
   A23: triangleDanger(`
@@ -361,15 +397,226 @@ const SCENES = {
     <text x="325" y="135" text-anchor="middle" font-size="14" font-weight="800" fill="var(--rouge)">Couloir de secours</text>
     <text x="325" y="152" text-anchor="middle" font-size="12" fill="var(--gris)">entre la bande de gauche et la suivante</text>
   </svg>`,
+
+  "distance-securite": `<svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" font-family="Arial,sans-serif">
+    <rect width="640" height="200" fill="#C9D2DE"/>
+    <line x1="0" y1="100" x2="640" y2="100" stroke="#fff" stroke-width="4" stroke-dasharray="18 14"/>
+    <g transform="translate(430,80)">
+      <rect x="0" y="0" width="70" height="40" rx="10" fill="var(--rouge)"/>
+      <polygon points="82,20 58,6 58,34" fill="var(--rouge)"/>
+    </g>
+    <g transform="translate(140,80)">
+      <rect x="0" y="0" width="70" height="40" rx="10" fill="var(--bleu)"/>
+      <polygon points="82,20 58,6 58,34" fill="var(--bleu)"/>
+    </g>
+    <line x1="225" y1="60" x2="428" y2="60" stroke="var(--encre)" stroke-width="2"/>
+    <text x="326" y="50" text-anchor="middle" font-size="16" font-weight="800" fill="var(--encre)">≈ 2 secondes</text>
+    <text x="326" y="170" text-anchor="middle" font-size="13" fill="var(--gris)">4 secondes par pluie ou de nuit</text>
+  </svg>`,
+
+  "feux-nuit": `<svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" font-family="Arial,sans-serif">
+    <text x="10" y="24" font-size="15" font-weight="800" fill="var(--encre)">Portée des feux la nuit</text>
+    <text x="10" y="72" font-size="14" font-weight="700" fill="var(--encre)">Croisement</text>
+    <rect x="150" y="56" width="130" height="26" fill="var(--jaune)"/>
+    <text x="290" y="74" font-size="13" fill="var(--gris)">≈65 m</text>
+    <text x="10" y="132" font-size="14" font-weight="700" fill="var(--encre)">Route</text>
+    <rect x="150" y="116" width="300" height="26" fill="var(--bleu)"/>
+    <text x="460" y="134" font-size="13" fill="var(--gris)">≈100–200 m</text>
+    <text x="10" y="180" font-size="12" fill="var(--gris)">Adaptez la vitesse pour pouvoir vous arrêter dans la zone éclairée.</text>
+  </svg>`,
+
+  "radar-troncon": `<svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" font-family="Arial,sans-serif">
+    <rect width="640" height="200" fill="#C9D2DE"/>
+    <line x1="0" y1="100" x2="640" y2="100" stroke="#fff" stroke-width="4" stroke-dasharray="18 14"/>
+    <rect x="80" y="30" width="14" height="120" fill="var(--encre)"/>
+    <rect x="66" y="20" width="42" height="24" rx="4" fill="var(--bleu)"/>
+    <text x="87" y="38" text-anchor="middle" font-size="11" font-weight="800" fill="#fff">A</text>
+    <rect x="540" y="30" width="14" height="120" fill="var(--encre)"/>
+    <rect x="526" y="20" width="42" height="24" rx="4" fill="var(--bleu)"/>
+    <text x="547" y="38" text-anchor="middle" font-size="11" font-weight="800" fill="#fff">B</text>
+    <g transform="translate(250,80)">
+      <rect x="0" y="0" width="70" height="34" rx="9" fill="var(--rouge)"/>
+      <polygon points="82,17 58,4 58,30" fill="var(--rouge)"/>
+    </g>
+    <text x="320" y="170" text-anchor="middle" font-size="13" font-weight="800" fill="var(--encre)">Vitesse moyenne calculée entre A et B</text>
+    <text x="320" y="188" text-anchor="middle" font-size="12" fill="var(--gris)">Ralentir juste avant B ne sert à rien</text>
+  </svg>`,
+
+  "triangle-autoroute": `<svg viewBox="0 0 640 220" xmlns="http://www.w3.org/2000/svg" font-family="Arial,sans-serif">
+    <rect width="640" height="220" fill="#C9D2DE"/>
+    <rect x="0" y="0" width="640" height="16" fill="#fff" opacity="0.6"/>
+    <rect x="60" y="70" width="90" height="42" rx="10" fill="var(--gris)"/>
+    <text x="105" y="96" text-anchor="middle" font-size="20" font-weight="800" fill="#fff">!</text>
+    <polygon points="360,150 380,110 400,150" fill="#fff" stroke="var(--rouge)" stroke-width="5"/>
+    <line x1="150" y1="130" x2="360" y2="145" stroke="var(--encre)" stroke-width="2" stroke-dasharray="4 4"/>
+    <text x="250" y="122" text-anchor="middle" font-size="13" font-weight="800" fill="var(--encre)">100 m sur autoroute (30 m ailleurs)</text>
+    <rect x="0" y="160" width="640" height="8" fill="var(--gris)"/>
+    <circle cx="470" cy="130" r="9" fill="var(--jaune)"/>
+    <rect x="460" y="139" width="20" height="26" rx="4" fill="var(--jaune)"/>
+    <text x="470" y="185" text-anchor="middle" font-size="12" font-weight="700" fill="var(--gris)">Gilet + derrière la glissière</text>
+  </svg>`,
+
+  "tirette": `<svg viewBox="0 0 640 220" xmlns="http://www.w3.org/2000/svg" font-family="Arial,sans-serif">
+    <rect width="640" height="220" fill="#C9D2DE"/>
+    <rect x="420" y="0" width="40" height="90" fill="var(--jaune)" opacity="0.5"/>
+    <line x1="0" y1="90" x2="420" y2="90" stroke="#fff" stroke-width="3" stroke-dasharray="14 10"/>
+    <path d="M400,30 L460,60" stroke="var(--encre)" stroke-width="4" fill="none"/>
+    <polygon points="466,63 450,58 456,48" fill="var(--encre)"/>
+    <rect x="60" y="20" width="60" height="30" rx="7" fill="var(--rouge)"/>
+    <rect x="180" y="20" width="60" height="30" rx="7" fill="var(--rouge)"/>
+    <rect x="300" y="20" width="60" height="30" rx="7" fill="var(--rouge)"/>
+    <rect x="20" y="150" width="60" height="30" rx="7" fill="var(--bleu)"/>
+    <rect x="140" y="150" width="60" height="30" rx="7" fill="var(--bleu)"/>
+    <rect x="260" y="150" width="60" height="30" rx="7" fill="var(--bleu)"/>
+    <rect x="480" y="150" width="60" height="30" rx="7" fill="var(--rouge)"/>
+    <rect x="560" y="150" width="60" height="30" rx="7" fill="var(--bleu)"/>
+    <text x="320" y="200" text-anchor="middle" font-size="14" font-weight="800" fill="var(--encre)">Insertion alternée, un véhicule à la fois</text>
+  </svg>`,
+
+  "passage-pieton": `<svg viewBox="0 0 640 220" xmlns="http://www.w3.org/2000/svg" font-family="Arial,sans-serif">
+    <rect width="640" height="220" fill="#C9D2DE"/>
+    <g fill="#fff">
+      <rect x="280" y="0" width="18" height="220"/>
+      <rect x="312" y="0" width="18" height="220"/>
+      <rect x="344" y="0" width="18" height="220"/>
+      <rect x="376" y="0" width="18" height="220"/>
+    </g>
+    <g transform="translate(120,90)">
+      <rect x="0" y="0" width="90" height="40" rx="10" fill="var(--bleu)"/>
+      <polygon points="102,20 78,6 78,34" fill="var(--bleu)"/>
+    </g>
+    <text x="165" y="160" text-anchor="middle" font-size="13" font-weight="800" fill="var(--bleu)">Vous vous arrêtez</text>
+    <g transform="translate(340,60)">
+      <circle cx="0" cy="0" r="9" fill="var(--encre)"/>
+      <line x1="0" y1="9" x2="0" y2="35" stroke="var(--encre)" stroke-width="5"/>
+      <line x1="0" y1="35" x2="-12" y2="55" stroke="var(--encre)" stroke-width="5"/>
+      <line x1="0" y1="35" x2="12" y2="55" stroke="var(--encre)" stroke-width="5"/>
+    </g>
+    <text x="340" y="185" text-anchor="middle" font-size="13" font-weight="800" fill="var(--encre)">Piéton engagé — priorité</text>
+  </svg>`,
+
+  "vehicule-prioritaire": `<svg viewBox="0 0 640 220" xmlns="http://www.w3.org/2000/svg" font-family="Arial,sans-serif">
+    <rect width="640" height="220" fill="#C9D2DE"/>
+    <line x1="0" y1="110" x2="640" y2="110" stroke="#fff" stroke-width="4" stroke-dasharray="18 14"/>
+    <g transform="translate(60,40)">
+      <rect x="0" y="0" width="90" height="42" rx="10" fill="var(--bleu)"/>
+      <polygon points="102,21 78,6 78,36" fill="var(--bleu)"/>
+    </g>
+    <text x="105" y="20" text-anchor="middle" font-size="12" font-weight="700" fill="var(--bleu)">Vous serrez à droite</text>
+    <g transform="translate(60,140)">
+      <rect x="0" y="0" width="90" height="42" rx="10" fill="var(--bleu)"/>
+      <polygon points="102,21 78,6 78,36" fill="var(--bleu)"/>
+    </g>
+    <g transform="translate(420,90)">
+      <rect x="0" y="0" width="110" height="42" rx="10" fill="#fff" stroke="var(--rouge)" stroke-width="5"/>
+      <circle cx="24" cy="21" r="8" fill="var(--bleu)"/>
+      <circle cx="52" cy="21" r="8" fill="var(--rouge)"/>
+      <polygon points="122,21 100,6 100,36" fill="var(--rouge)"/>
+    </g>
+    <text x="475" y="160" text-anchor="middle" font-size="13" font-weight="800" fill="var(--rouge)">Véhicule prioritaire — dégagez</text>
+  </svg>`,
+
+  "tourner-droite-cycliste": `<svg viewBox="0 0 640 300" xmlns="http://www.w3.org/2000/svg" font-family="Arial,sans-serif">
+    <rect width="640" height="300" fill="#E4E9F0"/>
+    <rect x="260" y="0" width="120" height="300" fill="#B7C1D1"/>
+    <rect x="0" y="120" width="640" height="60" fill="#B7C1D1"/>
+    <rect x="0" y="182" width="640" height="18" fill="#8FA0BC"/>
+    <g transform="translate(300,220)">
+      <rect x="0" y="0" width="38" height="64" rx="9" fill="var(--bleu)"/>
+      <polygon points="19,-11 32,10 6,10" fill="var(--bleu)"/>
+    </g>
+    <path d="M319,215 Q319,175 380,191" fill="none" stroke="var(--bleu)" stroke-width="4" stroke-dasharray="6 6"/>
+    <polygon points="386,193 372,183 372,197" fill="var(--bleu)"/>
+    <text x="320" y="290" text-anchor="middle" font-size="14" font-weight="800" fill="var(--bleu)">VOUS — vous tournez</text>
+    <g transform="translate(470,191)">
+      <circle cx="0" cy="-20" r="8" fill="var(--rouge)"/>
+      <line x1="0" y1="-12" x2="0" y2="0" stroke="var(--rouge)" stroke-width="4"/>
+      <circle cx="-10" cy="9" r="9" fill="none" stroke="var(--rouge)" stroke-width="3"/>
+      <circle cx="10" cy="9" r="9" fill="none" stroke="var(--rouge)" stroke-width="3"/>
+      <line x1="-10" y1="9" x2="10" y2="9" stroke="var(--rouge)" stroke-width="3"/>
+    </g>
+    <text x="470" y="260" text-anchor="middle" font-size="13" font-weight="800" fill="var(--rouge)">Cycliste tout droit — priorité</text>
+  </svg>`,
+
+  "ouverture-portiere": `<svg viewBox="0 0 640 220" xmlns="http://www.w3.org/2000/svg" font-family="Arial,sans-serif">
+    <rect width="640" height="220" fill="#C9D2DE"/>
+    <rect x="0" y="160" width="640" height="60" fill="#E4E9F0"/>
+    <rect x="180" y="60" width="220" height="80" rx="14" fill="var(--bleu)"/>
+    <path d="M400,70 L460,40 L460,130 L400,130 Z" fill="var(--bleu)" opacity="0.85"/>
+    <g transform="translate(560,100)">
+      <circle cx="0" cy="-20" r="9" fill="var(--rouge)"/>
+      <line x1="0" y1="-11" x2="0" y2="4" stroke="var(--rouge)" stroke-width="4"/>
+      <circle cx="-11" cy="14" r="10" fill="none" stroke="var(--rouge)" stroke-width="4"/>
+      <circle cx="11" cy="14" r="10" fill="none" stroke="var(--rouge)" stroke-width="4"/>
+      <line x1="-11" y1="14" x2="11" y2="14" stroke="var(--rouge)" stroke-width="4"/>
+    </g>
+    <text x="560" y="165" text-anchor="middle" font-size="13" font-weight="800" fill="var(--rouge)">Danger</text>
+    <text x="290" y="30" text-anchor="middle" font-size="14" font-weight="800" fill="var(--encre)">Ouvrez avec la main opposée (« dutch reach »)</text>
+  </svg>`,
+
+  "stationnement-cote": `<svg viewBox="0 0 640 240" xmlns="http://www.w3.org/2000/svg" font-family="Arial,sans-serif">
+    <polygon points="0,240 640,240 640,140 0,220" fill="#C9D2DE"/>
+    <rect x="0" y="220" width="640" height="20" fill="var(--gris)" opacity="0.4"/>
+    <g transform="translate(250,120) rotate(-8)">
+      <rect x="0" y="0" width="180" height="60" rx="14" fill="var(--bleu)"/>
+    </g>
+    <path d="M270,205 q10,-24 34,-18" fill="none" stroke="var(--encre)" stroke-width="4"/>
+    <polygon points="308,190 302,178 316,182" fill="var(--encre)"/>
+    <text x="320" y="60" text-anchor="middle" font-size="14" font-weight="800" fill="var(--encre)">Roues braquées vers la bordure</text>
+    <text x="320" y="80" text-anchor="middle" font-size="13" fill="var(--gris)">+ frein à main + vitesse engagée (ou P)</text>
+  </svg>`,
+
+  "disque-stationnement": `<svg viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg" font-family="Arial,sans-serif">
+    <circle cx="200" cy="110" r="90" fill="#fff" stroke="var(--bleu)" stroke-width="8"/>
+    <line x1="200" y1="110" x2="200" y2="40" stroke="var(--rouge)" stroke-width="6"/>
+    <circle cx="200" cy="110" r="6" fill="var(--encre)"/>
+    ${[0,1,2,3,4,5,6,7,8,9,10,11].map(i=>{
+      const a = (i/12)*2*Math.PI - Math.PI/2;
+      const x1=200+70*Math.cos(a), y1=110+70*Math.sin(a);
+      const x2=200+82*Math.cos(a), y2=110+82*Math.sin(a);
+      return `<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="var(--gris)" stroke-width="3"/>`;
+    }).join('')}
+    <text x="200" y="222" text-anchor="middle" font-size="14" font-weight="800" fill="var(--encre)">Flèche sur l'heure d'arrivée — max 2 h en zone bleue</text>
+  </svg>`,
+
+  "visibilite-insuffisante": `<svg viewBox="0 0 640 260" xmlns="http://www.w3.org/2000/svg" font-family="Arial,sans-serif">
+    <rect width="640" height="260" fill="#C9D2DE"/>
+    <path d="M0,180 Q220,180 320,120 Q420,60 640,60" fill="none" stroke="#fff" stroke-width="4" stroke-dasharray="18 14"/>
+    <g transform="translate(80,150)">
+      <rect x="0" y="0" width="80" height="36" rx="9" fill="var(--bleu)"/>
+      <polygon points="92,18 68,5 68,31" fill="var(--bleu)"/>
+    </g>
+    <g transform="translate(200,140)">
+      <rect x="0" y="0" width="60" height="30" rx="8" fill="var(--gris)"/>
+      <polygon points="70,15 50,4 50,26" fill="var(--gris)"/>
+    </g>
+    <path d="M320,120 Q420,60 640,60 L640,10 Q420,10 300,90 Z" fill="var(--rouge)" opacity="0.18"/>
+    <text x="470" y="45" text-anchor="middle" font-size="13" font-weight="800" fill="var(--rouge)">Zone invisible (sommet de côte)</text>
+    <g transform="translate(560,30) rotate(180)">
+      <rect x="-20" y="-15" width="40" height="30" rx="8" fill="var(--rouge)"/>
+    </g>
+    <text x="150" y="230" text-anchor="middle" font-size="13" font-weight="800" fill="var(--bleu)">Ne dépassez pas : visibilité insuffisante</text>
+  </svg>`,
 };
 
 function injecterVisuels(root){
   root.querySelectorAll("[data-signe]").forEach(el=>{
     const code = el.dataset.signe;
-    if(PANNEAUX[code]) el.innerHTML = PANNEAUX[code];
+    if(PANNEAUX[code]){
+      el.innerHTML = PANNEAUX[code];
+      const carte = el.closest(".signe-carte");
+      const legende = carte && carte.querySelector(".signe-legende");
+      const svg = el.querySelector("svg");
+      if(svg) svg.setAttribute("aria-label", legende ? legende.textContent.trim() : ("Panneau "+code));
+    }
   });
   root.querySelectorAll("[data-scene]").forEach(el=>{
     const key = el.dataset.scene;
-    if(SCENES[key]) el.innerHTML = SCENES[key];
+    if(SCENES[key]){
+      el.innerHTML = SCENES[key];
+      const legende = el.parentElement && el.parentElement.querySelector(".scene-legende");
+      const svg = el.querySelector("svg");
+      if(svg) svg.setAttribute("aria-label", legende ? legende.textContent.trim() : key);
+    }
   });
 }
