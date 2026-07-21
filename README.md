@@ -4,8 +4,10 @@ Site statique d'entraînement au permis B théorique belge : cours, examen blanc
 
 ## Contenu
 - `index.html` — page unique (SPA)
+- `manifest.json` — permet l'ajout du site à l'écran d'accueil sur mobile
 - `css/style.css` — styles
 - `js/data-*.js` — banque de 206 questions (6 thèmes)
+- `js/visuels.js` — bibliothèque de panneaux et scènes SVG (illustrations originales)
 - `js/cours.js` — contenu des 6 chapitres de cours
 - `js/app.js` — logique de l'application
 
