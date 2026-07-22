@@ -79,6 +79,7 @@ function renderListeChapitres(){
     <p class="sous-titre">${COURS.length} chapitres, avec exemples concrets, pour comprendre avant de s'entraîner.</p>
     <input type="search" class="recherche-cours" id="recherche-cours" placeholder="🔎 Rechercher un mot-clé (ex. STOP, alcool, rond-point...)">
     <button class="btn discret btn-lexique" id="btn-lexique">📖 Lexique des sigles et termes</button>
+    <button class="btn discret btn-lexique" id="btn-catalogue">🚸 Catalogue complet des panneaux (291)</button>
     <div class="liste-chapitres" id="liste-chapitres">
       ${COURS.map((c,i)=>`
         <button class="chapitre-item" data-chap="${i}">
@@ -112,6 +113,48 @@ function renderListeChapitres(){
     document.getElementById("aucun-resultat").style.display = visibles===0 ? "block" : "none";
   });
   document.getElementById("btn-lexique").addEventListener("click", renderLexique);
+  document.getElementById("btn-catalogue").addEventListener("click", renderCatalogueComplet);
+}
+
+function renderCatalogueComplet(){
+  const el = document.getElementById("vue-cours");
+  el.innerHTML = `
+    <button class="btn discret" data-back>← Tous les chapitres</button>
+    <h2 class="titre-vue" style="margin-top:.8rem">Catalogue complet des panneaux</h2>
+    <p class="sous-titre">291 panneaux officiels belges (familles A à Z), à titre de référence visuelle. Illustrations originales inspirées des dessins techniques du SPW.</p>
+    <input type="search" class="recherche-cours" id="recherche-catalogue" placeholder="🔎 Rechercher un code ou un mot (ex. B1, cycliste, stop...)">
+    <div id="zone-catalogue">
+      ${CATALOGUE_FAMILLES.map(f=>`
+        <h3 class="titre-famille-catalogue">${f.nom}</h3>
+        <div class="galerie-panneaux galerie-catalogue">
+          ${Object.keys(f.data).map(code=>`
+            <div class="signe-carte catalogue-item" data-recherche="${(code+' '+f.data[code].nom).toLowerCase()}">
+              <span class="signe-icone">${f.data[code].svg}</span>
+              <span class="signe-legende">${code}<br><small>${f.data[code].nom}</small></span>
+            </div>
+          `).join("")}
+        </div>
+      `).join("")}
+    </div>
+    <p class="aucun-resultat" id="aucun-resultat-catalogue" style="display:none">Aucun panneau ne correspond à cette recherche.</p>
+  `;
+  el.querySelector("[data-back]").addEventListener("click", renderListeChapitres);
+  document.getElementById("recherche-catalogue").addEventListener("input", (e)=>{
+    const q = e.target.value.trim().toLowerCase();
+    let visibles = 0;
+    document.querySelectorAll(".catalogue-item").forEach(item=>{
+      const match = q==="" || item.dataset.recherche.includes(q);
+      item.style.display = match ? "" : "none";
+      if(match) visibles++;
+    });
+    document.querySelectorAll(".galerie-catalogue").forEach(g=>{
+      const visible = Array.from(g.querySelectorAll(".catalogue-item")).some(i=>i.style.display!=="none");
+      g.style.display = visible ? "" : "none";
+      if(g.previousElementSibling) g.previousElementSibling.style.display = visible ? "" : "none";
+    });
+    document.getElementById("aucun-resultat-catalogue").style.display = visibles===0 ? "block" : "none";
+  });
+  el.scrollIntoView({behavior:"smooth"});
 }
 
 function renderLexique(){

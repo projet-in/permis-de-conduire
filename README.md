@@ -8,7 +8,8 @@ Site statique d'entraînement au permis B théorique belge : cours, examen blanc
 - `sw.js` — service worker : le site fonctionne hors ligne après une première visite
 - `css/style.css` — styles
 - `js/data-*.js` — banque de 321 questions (10 thèmes)
-- `js/visuels.js` — bibliothèque de panneaux et scènes SVG (illustrations originales) + détection automatique du visuel pertinent pour une question
+- `js/visuels.js` — bibliothèque de panneaux et scènes SVG utilisés dans cours/examen/flashcards + détection automatique du visuel pertinent pour une question
+- `js/catalogue-panneaux.js` — catalogue de référence des 291 panneaux officiels belges (familles A à Z), illustrations SVG originales
 - `js/cours.js` — contenu des 10 chapitres de cours + lexique
 - `js/app.js` — logique de l'application
 
@@ -19,6 +20,7 @@ Ce n'est pas une reproduction littérale du texte légal complet du Code de la r
 
 ## Fonctionnalités
 - Cours illustrés (48 panneaux, 24 mises en situation), examen blanc, flashcards
+- Catalogue complet et cherchable des 291 panneaux officiels belges (familles A à Z)
 - Panneaux/situations affichés automatiquement dans l'examen et les flashcards quand la question s'y prête
 - Table des matières, quiz rapide (5 questions, noté sur 3 étoiles) et liens croisés vers les chapitres liés, en fin de chaque chapitre
 - Mini-jeu Memory des panneaux
