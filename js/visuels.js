@@ -99,8 +99,7 @@ const PANNEAUX = {
     <line x1="12" y1="88" x2="88" y2="12" stroke="var(--gris)" stroke-width="5"/>
   `),
   A7: triangleDanger(`
-    <line x1="50" y1="35" x2="50" y2="70" stroke="var(--encre)" stroke-width="6"/>
-    <line x1="32" y1="52" x2="68" y2="52" stroke="var(--encre)" stroke-width="6"/>
+    <path d="M25,42 L45,58 L25,74 M75,42 L55,58 L75,74" fill="none" stroke="var(--encre)" stroke-width="4"/>
   `),
   D1: rondObligation(`
     <line x1="30" y1="30" x2="68" y2="68" stroke="#fff" stroke-width="8" stroke-linecap="round"/>

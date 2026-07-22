@@ -53,7 +53,7 @@ html:`
 <div class="signe-carte"><span class="signe-icone" data-signe="F7"></span><span class="signe-legende">F7 — fin d'autoroute</span></div>
 <div class="signe-carte"><span class="signe-icone" data-signe="F111"></span><span class="signe-legende">F111 — rue cyclable</span></div>
 <div class="signe-carte"><span class="signe-icone" data-signe="F87"></span><span class="signe-legende">F87 — dispositif surélevé</span></div>
-<div class="signe-carte"><span class="signe-icone" data-signe="A7"></span><span class="signe-legende">A7 — priorité de droite annoncée</span></div>
+<div class="signe-carte"><span class="signe-icone" data-signe="A7"></span><span class="signe-legende">A7a/b/c — rétrécissement de la chaussée</span></div>
 <div class="signe-carte"><span class="signe-icone" data-signe="C3"></span><span class="signe-legende">C3 — circulation interdite (2 sens)</span></div>
 <div class="signe-carte"><span class="signe-icone" data-signe="C45"></span><span class="signe-legende">C45 — fin de limitation</span></div>
 <div class="signe-carte"><span class="signe-icone" data-signe="C46"></span><span class="signe-legende">C46 — fin d'interdiction</span></div>
