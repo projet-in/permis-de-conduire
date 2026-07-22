@@ -32,6 +32,7 @@
       <button data-vue="cours">Cours</button>
       <button data-vue="examen">Examen blanc</button>
       <button data-vue="flash">Flashcards</button>
+      <button data-vue="memory">🃏 Memory</button>
     </nav>
   </div>
 </header>
@@ -69,8 +70,15 @@
         <p>Révision ludique par thème : retourne la carte, indique si tu savais, et les cartes à revoir reviennent automatiquement.</p>
         <span class="cta">Réviser en flash →</span>
       </button>
+      <button class="carte-mode" data-goto="memory">
+        <span class="panneau p-carre" aria-hidden="true">🃏</span>
+        <h3>Memory des panneaux</h3>
+        <p>Retrouve les paires de panneaux identiques : un jeu rapide pour muscler ta mémoire visuelle entre deux sessions de révision.</p>
+        <span class="cta">Jouer →</span>
+      </button>
     </div>
 
+    <div id="zone-badges"></div>
     <div id="zone-points-faibles"></div>
   </section>
 
@@ -82,6 +90,9 @@
 
   <!-- ============ FLASHCARDS ============ -->
   <section id="vue-flash" class="vue"></section>
+
+  <!-- ============ MEMORY ============ -->
+  <section id="vue-memory" class="vue"></section>
 
 </main>
 

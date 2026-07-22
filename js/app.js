@@ -16,7 +16,7 @@ const THEMES = [
 const ALL = THEMES.flatMap(t => t.data.map(q => ({...q, theme:t.id, themeNom:t.nom})));
 
 // --- Navigation ---
-const vues = ["accueil","cours","examen","flash"];
+const vues = ["accueil","cours","examen","flash","memory"];
 function allerA(vue){
   vues.forEach(v=>{
     document.getElementById("vue-"+v).classList.toggle("active", v===vue);
@@ -28,7 +28,8 @@ function allerA(vue){
   if(vue==="cours") renderListeChapitres();
   if(vue==="examen" && !examEnCours) renderConfigExam();
   if(vue==="flash" && !flashEnCours) renderChoixThemes();
-  if(vue==="accueil") renderPointsFaibles();
+  if(vue==="memory" && !memoryEnCours) demarrerMemory();
+  if(vue==="accueil"){ renderPointsFaibles(); renderBadges(); }
 }
 document.querySelectorAll("nav button[data-vue]").forEach(b=>{
   b.addEventListener("click", ()=>allerA(b.dataset.vue));
@@ -64,7 +65,10 @@ function renderListeChapitres(){
             <h3>${c.titre}</h3>
             <p>${c.resume}</p>
           </span>
-          <span class="badge-n">${chapitreEstLu(c.id) ? '✓ lu' : (i+1)+'/'+COURS.length}</span>
+          <span class="badges-chapitre">
+            <span class="badge-n">${chapitreEstLu(c.id) ? '✓ lu' : (i+1)+'/'+COURS.length}</span>
+            ${lireEtoilesChapitre(c.id)>0 ? `<span class="badge-etoiles">${"⭐".repeat(lireEtoilesChapitre(c.id))}</span>` : ""}
+          </span>
         </button>
       `).join("")}
     </div>
@@ -137,6 +141,23 @@ function chapitreEstLu(id){
   }catch(e){ return false; }
 }
 
+function enregistrerEtoilesChapitre(id, etoiles){
+  try{
+    const brut = localStorage.getItem("permisb-etoiles-chapitres");
+    const tout = brut ? JSON.parse(brut) : {};
+    if(!tout[id] || etoiles > tout[id]) tout[id] = etoiles;
+    localStorage.setItem("permisb-etoiles-chapitres", JSON.stringify(tout));
+  }catch(e){}
+}
+
+function lireEtoilesChapitre(id){
+  try{
+    const brut = localStorage.getItem("permisb-etoiles-chapitres");
+    const tout = brut ? JSON.parse(brut) : {};
+    return tout[id] || 0;
+  }catch(e){ return 0; }
+}
+
 function renderChapitre(index){
   const c = COURS[index];
   const el = document.getElementById("vue-cours");
@@ -196,9 +217,12 @@ function renderQuizChapitreQuestion(){
   const zone = document.getElementById("zone-quiz-chapitre");
   if(!zone) return;
   if(quizChapIndex >= quizChapQuestions.length){
+    const etoiles = quizChapScore>=5 ? 3 : quizChapScore>=4 ? 2 : quizChapScore>=3 ? 1 : 0;
+    enregistrerEtoilesChapitre(quizChapId, etoiles);
     zone.innerHTML = `
       <div class="resultat-quiz-chapitre">
         <h4>Quiz terminé : ${quizChapScore} / ${quizChapQuestions.length}</h4>
+        <div class="etoiles-quiz">${"⭐".repeat(etoiles)}${"☆".repeat(3-etoiles)}</div>
         <button class="btn jaune" id="btn-requiz">Refaire 5 nouvelles questions</button>
       </div>
     `;
@@ -496,6 +520,72 @@ function renderPointsFaibles(){
 }
 
 // ========================================================
+// STREAK QUOTIDIEN & BADGES
+// ========================================================
+function calculerStreakQuotidien(){
+  try{
+    const aujourdHui = new Date().toISOString().slice(0,10);
+    const derniere = localStorage.getItem("permisb-derniere-visite");
+    let streak = parseInt(localStorage.getItem("permisb-streak-quotidien")||"0");
+    if(derniere === aujourdHui) return streak;
+    const hier = new Date(Date.now()-86400000).toISOString().slice(0,10);
+    streak = (derniere === hier) ? streak+1 : 1;
+    localStorage.setItem("permisb-streak-quotidien", String(streak));
+    localStorage.setItem("permisb-derniere-visite", aujourdHui);
+    return streak;
+  }catch(e){ return 0; }
+}
+const STREAK_QUOTIDIEN = calculerStreakQuotidien();
+
+const BADGES = [
+  {emoji:"🌱", nom:"Premier pas", desc:"Lire un premier chapitre du cours", test:s=>s.chapitresLus>=1},
+  {emoji:"📚", nom:"Étudiant assidu", desc:`Lire les ${COURS.length} chapitres du cours`, test:s=>s.chapitresLus>=COURS.length},
+  {emoji:"📝", nom:"Premier examen", desc:"Terminer un premier examen blanc", test:s=>s.meilleurScore!==null},
+  {emoji:"✅", nom:"Objectif atteint", desc:"Réussir un examen (41/50 ou plus)", test:s=>s.meilleurScore!==null && s.meilleurScore>=41},
+  {emoji:"🏆", nom:"Sans-faute", desc:"Obtenir 50/50 à un examen blanc", test:s=>s.meilleurScore===50},
+  {emoji:"🔥", nom:"Série en flash", desc:"15 bonnes réponses d'affilée en flashcards", test:s=>s.meilleureSerieFlash>=15},
+  {emoji:"🎓", nom:"Expert d'un thème", desc:"90% de réussite sur un thème (10 questions min.)", test:s=>s.aUnThemeExpert},
+  {emoji:"📅", nom:"Régulier", desc:"3 jours d'affilée sur le site", test:s=>s.streakQuotidien>=3},
+  {emoji:"🏅", nom:"Marathonien", desc:"7 jours d'affilée sur le site", test:s=>s.streakQuotidien>=7},
+  {emoji:"🃏", nom:"Mémoire de fer", desc:"Terminer une partie de Memory", test:s=>s.memoryTermine},
+];
+
+function gatherStats(){
+  let chapitresLus = 0;
+  try{ chapitresLus = (JSON.parse(localStorage.getItem("permisb-chapitres-lus")||"[]")).length; }catch(e){}
+  let meilleurScore = null;
+  try{ const v = localStorage.getItem("permisb-meilleur-score"); meilleurScore = v!==null ? parseInt(v) : null; }catch(e){}
+  let meilleureSerieFlash = 0;
+  try{ meilleureSerieFlash = parseInt(localStorage.getItem("permisb-meilleure-serie-flash")||"0"); }catch(e){}
+  const themes = lirePointsFaibles();
+  const aUnThemeExpert = themes.some(t=>t.total>=10 && t.pct>=90);
+  let memoryTermine = false;
+  try{ memoryTermine = localStorage.getItem("permisb-memory-termine")==="1"; }catch(e){}
+  return {chapitresLus, meilleurScore, meilleureSerieFlash, aUnThemeExpert, streakQuotidien:STREAK_QUOTIDIEN, memoryTermine};
+}
+
+function renderBadges(){
+  const zone = document.getElementById("zone-badges");
+  if(!zone) return;
+  const stats = gatherStats();
+  const debloques = BADGES.filter(b=>b.test(stats)).length;
+  zone.innerHTML = `
+    <div class="panneau-badges">
+      <h4>🏅 Mes badges (${debloques}/${BADGES.length}) ${STREAK_QUOTIDIEN>=2 ? `<span class="streak-jours">🔥 ${STREAK_QUOTIDIEN} jours d'affilée</span>` : ""}</h4>
+      <div class="grille-badges">
+        ${BADGES.map(b=>{
+          const debloque = b.test(stats);
+          return `<div class="badge-item ${debloque?'debloque':'verrouille'}" title="${b.desc}">
+            <span class="badge-emoji">${debloque ? b.emoji : "🔒"}</span>
+            <span class="badge-nom">${b.nom}</span>
+          </div>`;
+        }).join("")}
+      </div>
+    </div>
+  `;
+}
+
+// ========================================================
 // MODE FLASHCARDS
 // ========================================================
 let flashEnCours = false;
@@ -590,7 +680,13 @@ function retournerCarte(){
 
 function marquerCarte(sue){
   const q = flashCartes[flashIndex];
-  if(sue){ flashSues++; flashStreak++; }
+  if(sue){
+    flashSues++; flashStreak++;
+    try{
+      const record = parseInt(localStorage.getItem("permisb-meilleure-serie-flash")||"0");
+      if(flashStreak > record) localStorage.setItem("permisb-meilleure-serie-flash", String(flashStreak));
+    }catch(e){}
+  }
   else { flashStreak = 0; flashARevoir.push(q); }
   flashIndex++;
   renderFlashcard();
@@ -599,11 +695,13 @@ function marquerCarte(sue){
 function finirFlash(){
   flashEnCours = false;
   const el = document.getElementById("vue-flash");
+  let record = 0;
+  try{ record = parseInt(localStorage.getItem("permisb-meilleure-serie-flash")||"0"); }catch(e){}
   el.innerHTML = `
     <div class="fin-flash">
       <span class="panneau p-losange" aria-hidden="true"></span>
       <h3>Session terminée</h3>
-      <p>${flashSues} carte(s) sue(s) · série maximale non trackée entre sessions</p>
+      <p>${flashSues} carte(s) sue(s) · meilleure série jamais atteinte : ${record}</p>
       <div class="actions-resultat">
         <button class="btn jaune" id="btn-refaire">Refaire une session</button>
         <button class="btn secondaire" data-goto="accueil">Retour à l'accueil</button>
@@ -612,6 +710,96 @@ function finirFlash(){
   `;
   el.querySelector("[data-goto]").addEventListener("click", ()=>allerA("accueil"));
   document.getElementById("btn-refaire").addEventListener("click", renderChoixThemes);
+}
+
+// ========================================================
+// MEMORY DES PANNEAUX
+// ========================================================
+let memoryEnCours = false;
+let memoryCartes = [], memoryPremiereCarte = null, memoryVerrouille = false, memoryPaires = 0, memoryCoups = 0;
+
+const CODES_MEMORY = ["B1","B5","B9","B11","C1","C35","E1","E3","F19","A23","D5","C43_50","M2","F111","B19","B21","F5","C23"];
+
+function demarrerMemory(){
+  memoryEnCours = true;
+  const nbPaires = 8;
+  const codes = shuffle(CODES_MEMORY).slice(0, nbPaires);
+  memoryCartes = shuffle([...codes, ...codes]).map((code,i)=>({id:i, code, retournee:false, trouvee:false}));
+  memoryPremiereCarte = null;
+  memoryVerrouille = false;
+  memoryPaires = 0;
+  memoryCoups = 0;
+  renderMemory();
+}
+
+function renderMemory(){
+  const el = document.getElementById("vue-memory");
+  if(!el) return;
+  const total = memoryCartes.length/2;
+  el.innerHTML = `
+    <h2 class="titre-vue">Memory des panneaux</h2>
+    <p class="sous-titre">Retrouve les paires de panneaux identiques : un jeu rapide pour muscler ta mémoire visuelle.</p>
+    <div class="stats-memory">
+      <span>Paires trouvées : ${memoryPaires} / ${total}</span>
+      <span>Coups joués : ${memoryCoups}</span>
+    </div>
+    <div class="grille-memory">
+      ${memoryCartes.map(c=>`
+        <button class="carte-memory ${c.trouvee?'trouvee':''} ${c.retournee?'retournee':''}" data-id="${c.id}" ${(c.trouvee||memoryVerrouille)?'disabled':''} aria-label="Carte mémoire">
+          ${(c.retournee||c.trouvee) ? `<span class="signe-icone-memory" data-signe="${c.code}"></span>` : `<span class="dos-memory">?</span>`}
+        </button>
+      `).join("")}
+    </div>
+    ${memoryPaires === total ? `
+      <div class="fin-memory">
+        <h3>Bravo ! 🎉</h3>
+        <p>Partie terminée en ${memoryCoups} coups.</p>
+        <button class="btn jaune" id="btn-rejouer-memory">Rejouer</button>
+      </div>
+    ` : ""}
+  `;
+  injecterVisuels(el);
+  el.querySelectorAll(".carte-memory:not(.trouvee)").forEach(b=>{
+    b.addEventListener("click", ()=>retournerCarteMemory(parseInt(b.dataset.id)));
+  });
+  const btnRejouer = document.getElementById("btn-rejouer-memory");
+  if(btnRejouer) btnRejouer.addEventListener("click", demarrerMemory);
+  if(memoryPaires === total){
+    memoryEnCours = false;
+    try{ localStorage.setItem("permisb-memory-termine", "1"); }catch(e){}
+  }
+}
+
+function retournerCarteMemory(id){
+  if(memoryVerrouille) return;
+  const carte = memoryCartes.find(c=>c.id===id);
+  if(!carte || carte.retournee || carte.trouvee) return;
+  carte.retournee = true;
+
+  if(!memoryPremiereCarte){
+    memoryPremiereCarte = carte;
+    renderMemory();
+    return;
+  }
+
+  memoryCoups++;
+  if(memoryPremiereCarte.code === carte.code){
+    memoryPremiereCarte.trouvee = true;
+    carte.trouvee = true;
+    memoryPremiereCarte = null;
+    memoryPaires++;
+    renderMemory();
+  } else {
+    memoryVerrouille = true;
+    renderMemory();
+    setTimeout(()=>{
+      memoryPremiereCarte.retournee = false;
+      carte.retournee = false;
+      memoryPremiereCarte = null;
+      memoryVerrouille = false;
+      renderMemory();
+    }, 800);
+  }
 }
 
 // ========================================================

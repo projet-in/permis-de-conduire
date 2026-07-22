@@ -340,6 +340,41 @@ footer b{color:#fff}
 }
 .panneau-faibles h4{font-size:.9rem;font-weight:800;color:var(--bleu-fonce);margin-bottom:.5rem}
 
+/* Badges et streak */
+.panneau-badges{background:var(--fond);border-radius:12px;padding:1rem 1.1rem;margin-top:1rem;text-align:left}
+.panneau-badges h4{font-size:.9rem;font-weight:800;color:var(--bleu-fonce);margin-bottom:.7rem;display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
+.streak-jours{background:#FFF1D6;color:#B8730A;font-size:.72rem;font-weight:800;border-radius:999px;padding:.2rem .6rem}
+.grille-badges{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:.6rem}
+.badge-item{
+  display:flex;flex-direction:column;align-items:center;gap:.25rem;text-align:center;
+  background:var(--carte);border:1.5px solid var(--trait);border-radius:10px;padding:.7rem .5rem;
+}
+.badge-item.verrouille{opacity:.45}
+.badge-emoji{font-size:1.5rem}
+.badge-nom{font-size:.7rem;font-weight:700;color:var(--gris);line-height:1.25}
+
+/* Étoiles de chapitre */
+.badges-chapitre{display:flex;flex-direction:column;align-items:flex-end;gap:.3rem}
+.badge-etoiles{font-size:.75rem}
+.etoiles-quiz{font-size:1.6rem;margin:.5rem 0 1rem;letter-spacing:.15em}
+
+/* Memory des panneaux */
+.stats-memory{display:flex;justify-content:space-between;font-size:.86rem;font-weight:700;color:var(--gris);margin-bottom:.9rem}
+.grille-memory{display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem;max-width:480px;margin:0 auto}
+.carte-memory{
+  aspect-ratio:1;border-radius:12px;border:2px solid var(--trait);background:var(--bleu);
+  display:flex;align-items:center;justify-content:center;padding:.4rem;transition:transform .15s;
+}
+.carte-memory:not(:disabled):hover{transform:scale(1.04)}
+.carte-memory.retournee,.carte-memory.trouvee{background:var(--carte)}
+.carte-memory.trouvee{border-color:var(--vert)}
+.dos-memory{color:#fff;font-size:1.6rem;font-weight:800}
+.signe-icone-memory{width:100%;height:100%}
+.signe-icone-memory svg{width:100%;height:100%;display:block}
+.fin-memory{text-align:center;margin-top:1.3rem;background:var(--carte);border:1.5px solid var(--trait);border-radius:var(--radius);padding:1.3rem;box-shadow:var(--ombre)}
+.fin-memory h3{font-size:1.15rem;font-weight:800;margin-bottom:.3rem}
+.fin-memory p{color:var(--gris);font-size:.9rem;margin-bottom:.9rem}
+
 /* Fiche mémo imprimable */
 .fiche-print{display:none}
 @media print{
