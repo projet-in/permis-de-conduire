@@ -240,10 +240,10 @@ label.opt-chrono{display:flex;align-items:center;gap:.5rem;font-size:.9rem;margi
 .stats-flash{display:flex;justify-content:space-between;align-items:center;margin-bottom:.9rem;font-size:.9rem;font-weight:700;color:var(--gris);flex-wrap:wrap;gap:.4rem}
 .streak{color:var(--rouge)}
 .flashcard{
-  perspective:1200px;min-height:340px;cursor:pointer;
+  perspective:1200px;min-height:400px;cursor:pointer;
 }
 .flash-inner{
-  position:relative;width:100%;min-height:340px;transition:transform .45s;transform-style:preserve-3d;
+  position:relative;width:100%;min-height:400px;transition:transform .45s;transform-style:preserve-3d;
 }
 .flashcard.retournee .flash-inner{transform:rotateY(180deg)}
 @media (prefers-reduced-motion:reduce){.flash-inner{transition:none}}
@@ -253,8 +253,11 @@ label.opt-chrono{display:flex;align-items:center;gap:.5rem;font-size:.9rem;margi
 }
 .flash-recto{background:var(--bleu);color:#fff;border:3px solid #fff;outline:2px solid var(--bleu)}
 .flash-recto .etiquette-theme{background:rgba(255,255,255,.15);color:#fff}
-.flash-recto h3{font-size:1.1rem;line-height:1.55;font-weight:700;flex:1;display:flex;align-items:center}
+.flash-recto h3{font-size:1.1rem;line-height:1.55;font-weight:700;flex:1;display:flex;align-items:center;margin:0}
 .flash-recto .indice{color:#C6D6EC;font-size:.83rem;text-align:center}
+.visuel-flash{background:rgba(255,255,255,.12);padding:.55rem;margin:.6rem 0 0}
+.visuel-flash.visuel-question-signe{width:60px;margin-left:auto;margin-right:auto}
+.visuel-flash.visuel-question-scene svg{max-height:120px}
 .flash-verso{background:var(--carte);border:1.5px solid var(--trait);transform:rotateY(180deg)}
 .flash-verso .bonne-rep{font-weight:800;color:var(--vert);font-size:1.02rem;margin:.4rem 0 .6rem;line-height:1.45}
 .flash-verso .explication{margin-top:auto}

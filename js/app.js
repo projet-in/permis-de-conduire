@@ -405,6 +405,7 @@ function renderFlashcard(){
   }
   const q = flashCartes[flashIndex];
   flashRetourne = false;
+  const visuel = detecterVisuelQuestion(q.q);
   const el = document.getElementById("vue-flash");
   el.innerHTML = `
     <div class="zone-flash">
@@ -417,6 +418,7 @@ function renderFlashcard(){
         <div class="flash-inner">
           <div class="flash-face flash-recto">
             <span class="etiquette-theme ${q.grave?'grave':''}">${q.themeNom}${q.grave?' · faute grave':''}</span>
+            ${visuel ? `<div class="visuel-question visuel-flash visuel-question-${visuel.type}"><div data-${visuel.type==='scene'?'scene':'signe'}="${visuel.valeur}"></div></div>` : ""}
             <h3>${q.q}</h3>
             <p class="indice">👆 Touche la carte pour voir la réponse (ou barre d'espace)</p>
           </div>
@@ -433,6 +435,7 @@ function renderFlashcard(){
       </div>
     </div>
   `;
+  if(visuel) injecterVisuels(el);
   const carte = document.getElementById("carte-flip");
   carte.addEventListener("click", retournerCarte);
   document.getElementById("btn-sait").addEventListener("click", (e)=>{e.stopPropagation();marquerCarte(true);});
