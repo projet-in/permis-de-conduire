@@ -7,20 +7,23 @@ Site statique d'entraînement au permis B théorique belge : cours, examen blanc
 - `manifest.json` — permet l'ajout du site à l'écran d'accueil sur mobile
 - `sw.js` — service worker : le site fonctionne hors ligne après une première visite
 - `css/style.css` — styles
-- `js/data-*.js` — banque de 292 questions (9 thèmes)
-- `js/visuels.js` — bibliothèque de panneaux et scènes SVG (illustrations originales)
-- `js/cours.js` — contenu des 9 chapitres de cours
+- `js/data-*.js` — banque de 321 questions (10 thèmes)
+- `js/visuels.js` — bibliothèque de panneaux et scènes SVG (illustrations originales) + détection automatique du visuel pertinent pour une question
+- `js/cours.js` — contenu des 10 chapitres de cours + lexique
 - `js/app.js` — logique de l'application
 
 ## Thèmes couverts
-Signalisation, priorités, vitesses, alcool & sanctions, stationnement, dépassement, secourisme & comportement en cas d'accident, écoconduite & chargement, usagers vulnérables & deux-roues.
+Signalisation, priorités, vitesses, alcool & sanctions, stationnement, dépassement, secourisme & comportement en cas d'accident, écoconduite & chargement, usagers vulnérables & deux-roues, autoroutes & voies rapides.
 
 Ce n'est pas une reproduction littérale du texte légal complet du Code de la route belge (l'arrêté royal du 1/12/1975), mais une couverture large des thèmes réellement testés à l'examen théorique officiel.
 
 ## Fonctionnalités
-- Cours illustrés (47 panneaux, 22 mises en situation), examen blanc, flashcards
+- Cours illustrés (48 panneaux, 24 mises en situation), examen blanc, flashcards
+- Panneaux/situations affichés automatiquement dans l'examen et les flashcards quand la question s'y prête
+- Table des matières, quiz rapide (5 questions) et liens croisés vers les chapitres liés, en fin de chaque chapitre
+- Lexique des sigles et termes techniques (MMA, PLS, ADR, SUL...)
+- Suivi des chapitres déjà lus et de la progression par thème (localStorage)
 - Recherche par mot-clé dans les cours
-- Suivi de progression par thème (cumulé entre les sessions, dans le navigateur)
 - Fiche mémo imprimable en A4 (bouton en bas de page)
 - Fonctionne hors connexion une fois visité une première fois
 - Raccourcis clavier en flashcards : espace (retourner), 1/2 ou flèches (marquer)

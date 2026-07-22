@@ -11,6 +11,7 @@ const THEMES = [
   {id:"secourisme",     nom:"Secourisme",    data:DATA_SECOURISME,    forme:"rond"},
   {id:"ecoconduite",    nom:"Écoconduite & chargement", data:DATA_ECOCONDUITE, forme:"carre"},
   {id:"usagers-vulnerables", nom:"Usagers vulnérables", data:DATA_USAGERS_VULNERABLES, forme:"losange"},
+  {id:"autoroutes", nom:"Autoroutes", data:DATA_AUTOROUTES, forme:"rond"},
 ];
 const ALL = THEMES.flatMap(t => t.data.map(q => ({...q, theme:t.id, themeNom:t.nom})));
 
@@ -52,8 +53,9 @@ function renderListeChapitres(){
   const el = document.getElementById("vue-cours");
   el.innerHTML = `
     <h2 class="titre-vue">Cours théoriques</h2>
-    <p class="sous-titre">6 chapitres, avec exemples concrets, pour comprendre avant de s'entraîner.</p>
+    <p class="sous-titre">${COURS.length} chapitres, avec exemples concrets, pour comprendre avant de s'entraîner.</p>
     <input type="search" class="recherche-cours" id="recherche-cours" placeholder="🔎 Rechercher un mot-clé (ex. STOP, alcool, rond-point...)">
+    <button class="btn discret btn-lexique" id="btn-lexique">📖 Lexique des sigles et termes</button>
     <div class="liste-chapitres" id="liste-chapitres">
       ${COURS.map((c,i)=>`
         <button class="chapitre-item" data-chap="${i}">
@@ -62,7 +64,7 @@ function renderListeChapitres(){
             <h3>${c.titre}</h3>
             <p>${c.resume}</p>
           </span>
-          <span class="badge-n">${i+1}/${COURS.length}</span>
+          <span class="badge-n">${chapitreEstLu(c.id) ? '✓ lu' : (i+1)+'/'+COURS.length}</span>
         </button>
       `).join("")}
     </div>
@@ -83,6 +85,56 @@ function renderListeChapitres(){
     });
     document.getElementById("aucun-resultat").style.display = visibles===0 ? "block" : "none";
   });
+  document.getElementById("btn-lexique").addEventListener("click", renderLexique);
+}
+
+function renderLexique(){
+  const el = document.getElementById("vue-cours");
+  el.innerHTML = `
+    <button class="btn discret" data-back>← Tous les chapitres</button>
+    <h2 class="titre-vue" style="margin-top:.8rem">Lexique des sigles et termes</h2>
+    <p class="sous-titre">Les abréviations et termes techniques rencontrés dans les cours, expliqués simplement.</p>
+    <div class="liste-lexique">
+      ${LEXIQUE.map(l=>`
+        <div class="entree-lexique">
+          <strong>${l.terme}</strong>
+          <p>${l.def}</p>
+        </div>
+      `).join("")}
+    </div>
+  `;
+  el.querySelector("[data-back]").addEventListener("click", renderListeChapitres);
+  el.scrollIntoView({behavior:"smooth"});
+}
+
+function genererTOC(container){
+  const contenu = container.querySelector(".contenu-cours");
+  const titres = contenu.querySelectorAll("h3");
+  if(titres.length < 2) return;
+  let items = "";
+  titres.forEach((h,i)=>{
+    h.id = "sec-"+i;
+    items += `<li><a href="#sec-${i}">${h.textContent.trim()}</a></li>`;
+  });
+  const toc = document.createElement("div");
+  toc.className = "toc-chapitre";
+  toc.innerHTML = `<strong>Dans ce chapitre</strong><ul>${items}</ul>`;
+  contenu.before(toc);
+}
+
+// --- Suivi de lecture des chapitres (localStorage) ---
+function marquerChapitreLu(id){
+  try{
+    const brut = localStorage.getItem("permisb-chapitres-lus");
+    const lus = brut ? JSON.parse(brut) : [];
+    if(!lus.includes(id)){ lus.push(id); localStorage.setItem("permisb-chapitres-lus", JSON.stringify(lus)); }
+  }catch(e){}
+}
+function chapitreEstLu(id){
+  try{
+    const brut = localStorage.getItem("permisb-chapitres-lus");
+    return brut ? JSON.parse(brut).includes(id) : false;
+  }catch(e){ return false; }
 }
 
 function renderChapitre(index){
@@ -93,16 +145,104 @@ function renderChapitre(index){
     <h2 class="titre-vue" style="margin-top:.8rem">${c.titre}</h2>
     <p class="sous-titre">Chapitre ${index+1} / ${COURS.length}</p>
     <div class="contenu-cours">${c.html}</div>
+    <div class="quiz-chapitre-bloc">
+      <h3>🧪 Quiz rapide sur ce chapitre</h3>
+      <p class="sous-titre" style="margin-bottom:.8rem">5 questions tirées au hasard dans ce thème, pour vérifier ce que vous avez retenu.</p>
+      <button class="btn jaune" id="btn-lancer-quiz">Lancer le quiz</button>
+      <div id="zone-quiz-chapitre"></div>
+    </div>
     <div class="nav-cours">
       <button class="btn secondaire" ${index===0?"disabled":""} data-prev>← Chapitre précédent</button>
       <button class="btn" ${index===COURS.length-1?"disabled":""} data-next>Chapitre suivant →</button>
     </div>
   `;
+  genererTOC(el);
   el.querySelector("[data-back]").addEventListener("click", renderListeChapitres);
   if(index>0) el.querySelector("[data-prev]").addEventListener("click", ()=>renderChapitre(index-1));
   if(index<COURS.length-1) el.querySelector("[data-next]").addEventListener("click", ()=>renderChapitre(index+1));
   injecterVisuels(el);
+  document.getElementById("btn-lancer-quiz").addEventListener("click", (e)=>{
+    e.target.style.display = "none";
+    demarrerQuizChapitre(c.id, index);
+  });
+  el.querySelectorAll("[data-goto-chapitre]").forEach(a=>{
+    a.addEventListener("click", (e)=>{
+      e.preventDefault();
+      const idx = COURS.findIndex(ch=>ch.id===a.dataset.gotoChapitre);
+      if(idx>=0) renderChapitre(idx);
+    });
+  });
+  marquerChapitreLu(c.id);
   el.scrollIntoView({behavior:"smooth"});
+}
+
+// ========================================================
+// QUIZ RAPIDE DE FIN DE CHAPITRE
+// ========================================================
+let quizChapQuestions = [], quizChapIndex = 0, quizChapScore = 0, quizChapId = null, quizChapRetourIndex = null;
+
+function demarrerQuizChapitre(themeId, indexChapitre){
+  const theme = THEMES.find(t=>t.id===themeId);
+  if(!theme) return;
+  quizChapId = themeId;
+  quizChapRetourIndex = indexChapitre;
+  quizChapQuestions = shuffle(theme.data.map(q=>({...q, theme:theme.id, themeNom:theme.nom}))).slice(0,5);
+  quizChapIndex = 0;
+  quizChapScore = 0;
+  renderQuizChapitreQuestion();
+}
+
+function renderQuizChapitreQuestion(){
+  const zone = document.getElementById("zone-quiz-chapitre");
+  if(!zone) return;
+  if(quizChapIndex >= quizChapQuestions.length){
+    zone.innerHTML = `
+      <div class="resultat-quiz-chapitre">
+        <h4>Quiz terminé : ${quizChapScore} / ${quizChapQuestions.length}</h4>
+        <button class="btn jaune" id="btn-requiz">Refaire 5 nouvelles questions</button>
+      </div>
+    `;
+    document.getElementById("btn-requiz").addEventListener("click", ()=>demarrerQuizChapitre(quizChapId, quizChapRetourIndex));
+    return;
+  }
+  const q = quizChapQuestions[quizChapIndex];
+  const visuel = detecterVisuelQuestion(q.q);
+  zone.innerHTML = `
+    <div class="carte-question carte-quiz-chapitre">
+      <span class="compteur-quiz">Question ${quizChapIndex+1} / ${quizChapQuestions.length}</span>
+      <h3>${q.q}</h3>
+      ${visuel ? `<div class="visuel-question visuel-question-${visuel.type}"><div data-${visuel.type==='scene'?'scene':'signe'}="${visuel.valeur}"></div></div>` : ""}
+      <div class="reponses">
+        ${q.opts.map((o,i)=>`<button data-i="${i}">${o}</button>`).join("")}
+      </div>
+      <div id="zone-explication-quiz"></div>
+      <div class="pied-question">
+        <button class="btn secondaire" id="btn-suivant-quiz" style="display:none">${quizChapIndex===quizChapQuestions.length-1?"Voir le score":"Question suivante →"}</button>
+      </div>
+    </div>
+  `;
+  if(visuel) injecterVisuels(zone);
+  zone.querySelectorAll(".reponses button").forEach(b=>{
+    b.addEventListener("click", ()=>repondreQuizChapitre(parseInt(b.dataset.i)));
+  });
+}
+
+function repondreQuizChapitre(choix){
+  const q = quizChapQuestions[quizChapIndex];
+  const correct = choix === q.a;
+  if(correct) quizChapScore++;
+  const zone = document.getElementById("zone-quiz-chapitre");
+  zone.querySelectorAll(".reponses button").forEach((b,i)=>{
+    b.disabled = true;
+    if(i===q.a) b.classList.add("bonne");
+    else if(i===choix) b.classList.add("mauvaise");
+  });
+  document.getElementById("zone-explication-quiz").innerHTML = `
+    <div class="explication ${correct?'ok':'ko'}">${correct ? "✅ Bonne réponse. " : "❌ Ce n'est pas la bonne réponse. "}${q.exp}</div>
+  `;
+  const btn = document.getElementById("btn-suivant-quiz");
+  btn.style.display = "inline-block";
+  btn.onclick = () => { quizChapIndex++; renderQuizChapitreQuestion(); };
 }
 
 // ========================================================

@@ -128,6 +128,28 @@ p.sous-titre{color:var(--gris);margin-bottom:1.2rem;font-size:.95rem}
   background:#FFF8E1;border:1.5px solid var(--jaune);border-radius:10px;
   padding:.75rem .9rem;margin:.7rem 0;font-size:.9rem;line-height:1.55;
 }
+
+/* Table des matières du chapitre */
+.toc-chapitre{
+  background:var(--fond);border-radius:12px;padding:.9rem 1.1rem;margin-bottom:1rem;font-size:.88rem;
+}
+.toc-chapitre strong{display:block;margin-bottom:.4rem;color:var(--bleu-fonce);font-size:.82rem;text-transform:uppercase;letter-spacing:.04em}
+.toc-chapitre ul{list-style:none;display:flex;flex-wrap:wrap;gap:.4rem .8rem;margin:0;padding:0}
+.toc-chapitre a{color:var(--bleu);font-weight:700;text-decoration:none}
+.toc-chapitre a:hover{text-decoration:underline}
+
+/* Quiz rapide de fin de chapitre */
+.quiz-chapitre-bloc{
+  background:var(--carte);border:1.5px solid var(--trait);border-radius:var(--radius);
+  padding:1.4rem;margin-top:1rem;box-shadow:var(--ombre);text-align:center;
+}
+.quiz-chapitre-bloc h3{font-size:1.05rem;font-weight:800;color:var(--bleu-fonce);margin-bottom:.3rem}
+.quiz-chapitre-bloc .sous-titre{margin-bottom:0}
+.carte-quiz-chapitre{text-align:left;box-shadow:none;border:none;padding:0;margin-top:1rem}
+.compteur-quiz{display:inline-block;font-size:.78rem;font-weight:800;color:var(--gris);margin-bottom:.6rem}
+.resultat-quiz-chapitre{padding:.5rem 0}
+.resultat-quiz-chapitre h4{font-size:1.1rem;font-weight:800;color:var(--bleu-fonce);margin-bottom:.8rem}
+
 .nav-cours{display:flex;justify-content:space-between;gap:.6rem;margin-top:1rem;flex-wrap:wrap}
 
 /* Icônes de panneaux inline dans le texte */
@@ -283,6 +305,28 @@ footer b{color:#fff}
 }
 .recherche-cours:focus{border-color:var(--bleu)}
 .aucun-resultat{color:var(--gris);font-size:.9rem;padding:1rem;text-align:center}
+.btn-lexique{width:100%;margin-bottom:1rem;text-align:center}
+
+/* Lexique */
+.liste-lexique{display:grid;gap:.8rem}
+.entree-lexique{
+  background:var(--carte);border:1.5px solid var(--trait);border-radius:12px;
+  padding:1rem 1.2rem;box-shadow:var(--ombre);
+}
+.entree-lexique strong{display:block;color:var(--bleu-fonce);font-size:.98rem;margin-bottom:.3rem}
+.entree-lexique p{font-size:.88rem;color:var(--gris);line-height:1.55}
+
+/* Liens croisés entre chapitres */
+.chapitres-lies{
+  margin-top:1.3rem;padding-top:1rem;border-top:1.5px dashed var(--trait);
+  display:flex;align-items:center;flex-wrap:wrap;gap:.5rem;font-size:.86rem;
+}
+.chapitres-lies strong{color:var(--gris);font-weight:700}
+.chapitres-lies a{
+  background:var(--fond);color:var(--bleu);font-weight:700;text-decoration:none;
+  border-radius:999px;padding:.3rem .8rem;
+}
+.chapitres-lies a:hover{background:var(--bleu);color:#fff}
 
 /* Suivi de progression par thème */
 .progression-themes{display:grid;gap:.6rem;margin-top:1rem;text-align:left}

@@ -1,5 +1,5 @@
 // Service worker — mise en cache des fichiers du site pour une utilisation hors-ligne
-const CACHE_NAME = "permis-b-v4";
+const CACHE_NAME = "permis-b-v6";
 const ASSETS = [
   "./",
   "./index.html",
@@ -14,6 +14,7 @@ const ASSETS = [
   "./js/data-secourisme.js",
   "./js/data-ecoconduite.js",
   "./js/data-usagers-vulnerables.js",
+  "./js/data-autoroutes.js",
   "./js/visuels.js",
   "./js/cours.js",
   "./js/app.js"

@@ -92,6 +92,11 @@ html:`
 <div class="signe-carte"><span class="signe-icone" data-signe="A15"></span><span class="signe-legende">A15 — chaussée glissante</span></div>
 <div class="signe-carte"><span class="signe-icone" data-signe="A23"></span><span class="signe-legende">A23 — enfants</span></div>
 </div>
+<div class="chapitres-lies">
+<strong>Voir aussi :</strong>
+<a href="#" data-goto-chapitre="priorites">Priorités</a>
+<a href="#" data-goto-chapitre="autoroutes">Autoroutes</a>
+</div>
 `},
 {
 id:"priorites", titre:"Les priorités", forme:"losange",
@@ -150,6 +155,12 @@ html:`
 <div class="scene-illustration"><div data-scene="passage-pieton"></div><p class="scene-legende">Un piéton engagé ou sur le point de s'engager a priorité, même sans feux.</p></div>
 <div class="scene-illustration"><div data-scene="tirette"></div><p class="scene-legende">La tirette : on utilise les deux bandes jusqu'au rétrécissement, puis on s'insère un véhicule à la fois.</p></div>
 <div class="scene-illustration"><div data-scene="couloir-secours"></div><p class="scene-legende">Dès que le trafic se fige, chacun serre son côté pour laisser un couloir aux secours — jamais l'inverse.</p></div>
+<div class="chapitres-lies">
+<strong>Voir aussi :</strong>
+<a href="#" data-goto-chapitre="depassement">Dépassement</a>
+<a href="#" data-goto-chapitre="autoroutes">Autoroutes</a>
+<a href="#" data-goto-chapitre="usagers-vulnerables">Usagers vulnérables</a>
+</div>
 `},
 {
 id:"vitesses", titre:"Vitesses & distances", forme:"rond",
@@ -207,6 +218,12 @@ html:`
 <li>Remorquage d'un véhicule en panne : allure très réduite, autoroute interdite (sauf pour la quitter à la première sortie).</li>
 <li>Régulateur de vitesse : à éviter sous la pluie, sur sol glissant et en trafic dense.</li>
 </ul>
+<div class="chapitres-lies">
+<strong>Voir aussi :</strong>
+<a href="#" data-goto-chapitre="autoroutes">Autoroutes</a>
+<a href="#" data-goto-chapitre="depassement">Dépassement</a>
+<a href="#" data-goto-chapitre="ecoconduite">Écoconduite & conditions</a>
+</div>
 `},
 {
 id:"alcool", titre:"Alcool, drogues & sanctions", forme:"rond",
@@ -263,6 +280,11 @@ html:`
 <li>Fatigue : aux premiers signes, pause + micro-sieste 15–20 min. Jamais de moteur tournant dans un local fermé (CO mortel).</li>
 </ul>
 <div class="scene-illustration"><div data-scene="triangle-autoroute"></div><p class="scene-legende">En panne : triangle à bonne distance, gilet, et tout le monde derrière la glissière de sécurité.</p></div>
+<div class="chapitres-lies">
+<strong>Voir aussi :</strong>
+<a href="#" data-goto-chapitre="secourisme">Secourisme</a>
+<a href="#" data-goto-chapitre="ecoconduite">Écoconduite & conditions</a>
+</div>
 `},
 {
 id:"stationnement", titre:"Arrêt & stationnement", forme:"carre",
@@ -314,6 +336,11 @@ html:`
 <li>Moteur coupé à l'arrêt ; remorque non attelée : max 24 h au même endroit ; mal stationné = amende <strong>+ dépannage à vos frais</strong>.</li>
 </ul>
 <div class="scene-illustration"><div data-scene="ouverture-portiere"></div><p class="scene-legende">La main opposée force la rotation du buste et le contrôle naturel de l'angle mort avant d'ouvrir.</p></div>
+<div class="chapitres-lies">
+<strong>Voir aussi :</strong>
+<a href="#" data-goto-chapitre="usagers-vulnerables">Usagers vulnérables</a>
+<a href="#" data-goto-chapitre="ecoconduite">Écoconduite & conditions</a>
+</div>
 `},
 {
 id:"depassement", titre:"Dépassement & croisement", forme:"rond",
@@ -375,6 +402,12 @@ html:`
 <div class="signe-carte"><span class="signe-icone" data-signe="B19"></span><span class="signe-legende">B19 — vous cédez</span></div>
 <div class="signe-carte"><span class="signe-icone" data-signe="B21"></span><span class="signe-legende">B21 — vous êtes prioritaire</span></div>
 </div>
+<div class="chapitres-lies">
+<strong>Voir aussi :</strong>
+<a href="#" data-goto-chapitre="priorites">Priorités</a>
+<a href="#" data-goto-chapitre="usagers-vulnerables">Usagers vulnérables</a>
+<a href="#" data-goto-chapitre="autoroutes">Autoroutes</a>
+</div>
 `},
 {
 id:"secourisme", titre:"Secourisme & comportement en cas d'accident", forme:"rond",
@@ -412,6 +445,12 @@ html:`
 <li><strong>Non-assistance à personne en danger</strong> : délit grave — chacun doit agir à la mesure de ses moyens.</li>
 </ul>
 <div class="exemple">💡 <strong>Exemple concret :</strong> un enfant est laissé seul dans une voiture en plein soleil quelques minutes à peine : la température intérieure peut devenir dangereuse en très peu de temps.</div>
+<div class="chapitres-lies">
+<strong>Voir aussi :</strong>
+<a href="#" data-goto-chapitre="alcool">Alcool & sanctions</a>
+<a href="#" data-goto-chapitre="autoroutes">Autoroutes</a>
+<a href="#" data-goto-chapitre="ecoconduite">Écoconduite & conditions</a>
+</div>
 `},
 {
 id:"ecoconduite", titre:"Écoconduite, chargement & conditions particulières", forme:"carre",
@@ -459,6 +498,12 @@ html:`
 <li>Pression des pneus correcte : moins de consommation, meilleure adhérence.</li>
 <li>Couper le moteur en cas d'arrêt prolongé plutôt que de le laisser tourner inutilement.</li>
 </ul>
+<div class="chapitres-lies">
+<strong>Voir aussi :</strong>
+<a href="#" data-goto-chapitre="vitesses">Vitesses</a>
+<a href="#" data-goto-chapitre="autoroutes">Autoroutes</a>
+<a href="#" data-goto-chapitre="secourisme">Secourisme</a>
+</div>
 `},
 {
 id:"usagers-vulnerables", titre:"Usagers vulnérables & deux-roues", forme:"losange",
@@ -516,5 +561,92 @@ html:`
 <li>Cortèges et groupes cyclistes encadrés : interdiction de les couper.</li>
 </ul>
 <div class="scene-illustration"><div data-scene="vehicule-prioritaire"></div><p class="scene-legende">Sirène et feux bleus : dégagez immédiatement, quitte à vous arrêter sur le côté.</p></div>
+<div class="chapitres-lies">
+<strong>Voir aussi :</strong>
+<a href="#" data-goto-chapitre="depassement">Dépassement</a>
+<a href="#" data-goto-chapitre="priorites">Priorités</a>
+<a href="#" data-goto-chapitre="stationnement">Stationnement</a>
+</div>
+`},
+{
+id:"autoroutes", titre:"Autoroutes & voies rapides", forme:"rond",
+resume:"Entrée, sortie, vitesses, interdictions spécifiques et réflexes propres à l'autoroute.",
+html:`
+<h3>1. Entrer et sortir</h3>
+<ul>
+<li><strong>Bande d'accélération</strong> : atteindre une vitesse compatible avec le trafic avant de s'insérer — c'est vous qui cédez le passage.</li>
+<li><strong>Bande de décélération</strong> : réduire l'allure sur la bande elle-même, pas avant, pour ne pas surprendre ceux qui continuent.</li>
+<li>Sortie manquée : jamais de freinage brutal ni de marche arrière — direction la sortie suivante.</li>
+</ul>
+<div class="galerie-panneaux">
+<div class="signe-carte"><span class="signe-icone" data-signe="F5"></span><span class="signe-legende">F5 — début d'autoroute</span></div>
+<div class="signe-carte"><span class="signe-icone" data-signe="F7"></span><span class="signe-legende">F7 — fin d'autoroute</span></div>
+</div>
+
+<h3>2. Vitesses et distances</h3>
+<ul>
+<li><strong>120 km/h</strong> maximum, <strong>70 km/h</strong> minimum (hors ralentissements/conditions dégradées).</li>
+<li>Ensemble &gt; 3,5 t : limité à <strong>90 km/h</strong>.</li>
+<li>Radar tronçon : vitesse moyenne entre deux points — ralentir juste avant le second point est inutile.</li>
+<li>Panneaux à messages variables : même valeur légale qu'un panneau fixe.</li>
+</ul>
+<div class="galerie-panneaux">
+<div class="signe-carte"><span class="signe-icone" data-signe="C43_120"></span><span class="signe-legende">C43 — 120 km/h</span></div>
+</div>
+<div class="scene-illustration"><div data-scene="radar-troncon"></div><p class="scene-legende">Le radar tronçon calcule une moyenne : inutile de ralentir juste avant le second point de mesure.</p></div>
+
+<h3>3. Ce qui est interdit</h3>
+<ul>
+<li>Piétons, cyclistes, cyclomoteurs et véhicules lents.</li>
+<li>Demi-tour, marche arrière, franchissement de la berme centrale.</li>
+<li>Arrêt hors nécessité réelle (panne, malaise, accident).</li>
+<li>Dépassement par les +7,5 t en cas de précipitations.</li>
+</ul>
+
+<h3>4. Circulation dense et incidents</h3>
+<ul>
+<li><strong>Tirette</strong> : deux bandes utilisées jusqu'au rétrécissement, puis insertion alternée un véhicule à la fois.</li>
+<li><strong>Couloir de secours</strong> : entre la bande de gauche et sa voisine, dès que le trafic se fige.</li>
+<li>Ralentissement brutal en amont d'un accident : warnings pour prévenir les suiveurs.</li>
+</ul>
+<div class="scene-illustration"><div data-scene="tirette"></div><p class="scene-legende">La tirette : on utilise les deux bandes jusqu'au rétrécissement, puis on s'insère un véhicule à la fois.</p></div>
+<div class="scene-illustration"><div data-scene="couloir-secours"></div><p class="scene-legende">Dès que le trafic se fige, chacun serre son côté pour laisser un couloir aux secours.</p></div>
+
+<h3>5. Panne et conditions difficiles</h3>
+<ul>
+<li>Panne : bande d'arrêt d'urgence si possible, gilet avant de sortir, triangle à ±100 m, tout le monde derrière la glissière.</li>
+<li>Brouillard : vitesse réduite, distances augmentées, feux de croisement (jamais feux de route).</li>
+<li>Longs trajets : la fatigue et la monotonie augmentent le risque d'endormissement — pauses régulières en aire de repos.</li>
+</ul>
+<div class="scene-illustration"><div data-scene="triangle-autoroute"></div><p class="scene-legende">En panne : triangle à bonne distance, gilet, et tout le monde derrière la glissière de sécurité.</p></div>
+
+<div class="chapitres-lies">
+<strong>Voir aussi :</strong>
+<a href="#" data-goto-chapitre="priorites">Priorités</a>
+<a href="#" data-goto-chapitre="vitesses">Vitesses</a>
+<a href="#" data-goto-chapitre="secourisme">Secourisme</a>
+</div>
 `}
 ];
+
+// ===== Lexique des sigles et termes techniques =====
+const LEXIQUE = [
+{terme:"ADR", def:"Accord européen relatif au transport international des marchandises dangereuses par route. Le panneau orange numéroté sur un camion indique la nature du danger transporté."},
+{terme:"BAC / taux d'alcoolémie", def:"Concentration d'alcool dans le sang, exprimée en grammes par litre (g/l). Limite générale en Belgique : 0,5 g/l."},
+{terme:"DEA", def:"Défibrillateur automatisé externe. Appareil public utilisable par toute personne, qui guide vocalement chaque geste en cas d'arrêt cardiaque."},
+{terme:"MMA", def:"Masse maximale autorisée. Poids total qu'un véhicule (ou un ensemble avec remorque) est autorisé à atteindre en charge, indiqué sur le certificat d'immatriculation."},
+{terme:"PLS", def:"Position latérale de sécurité. Position dans laquelle on place une victime inconsciente qui respire, pour dégager ses voies respiratoires."},
+{terme:"PMR", def:"Personne à mobilité réduite. Fait partie des usagers vulnérables auxquels une attention particulière est due."},
+{terme:"RC (assurance)", def:"Responsabilité civile. Assurance obligatoire qui indemnise les dommages causés à des tiers en cas d'accident."},
+{terme:"SUL", def:"Sens unique limité. Rue à sens unique pour les voitures, mais ouverte aux cyclistes à contresens (signalée par le panneau additionnel M2)."},
+{terme:"Zone 30 / F4a", def:"Zone où la vitesse est limitée à 30 km/h dans tout le périmètre, jusqu'au signal de fin de zone (F4b)."},
+{terme:"SAS vélo", def:"Zone avancée réservée aux cyclistes devant la ligne d'arrêt des voitures à un feu rouge, pour un démarrage plus sûr et plus visible."},
+{terme:"Zone bleue", def:"Zone de stationnement réglementé nécessitant un disque de stationnement, avec une durée maximale (souvent 2 h)."},
+{terme:"Tirette (fermeture éclair)", def:"Technique d'insertion alternée, un véhicule à la fois, à l'approche d'un rétrécissement de bandes en circulation ralentie."},
+{terme:"Couloir de secours", def:"Espace formé entre la bande de gauche et la bande voisine dès que le trafic se fige sur autoroute, pour laisser passer les véhicules de secours."},
+{terme:"Radar tronçon", def:"Dispositif qui mesure la vitesse moyenne d'un véhicule entre deux points fixes distants, plutôt qu'une vitesse instantanée."},
+{terme:"Angle mort", def:"Zone autour d'un véhicule non couverte par les rétroviseurs, où un autre usager (souvent un cycliste ou piéton) peut devenir invisible pour le conducteur."},
+{terme:"Dutch reach", def:"Technique consistant à ouvrir la portière avec la main opposée à celle-ci, ce qui force à tourner le buste et à contrôler naturellement l'angle mort."},
+{terme:"Faute grave (examen)", def:"À l'examen théorique, erreur sur une question liée aux priorités, feux, alcool, vitesses ou sens interdit, qui coûte 5 points au lieu d'1."},
+];
+
