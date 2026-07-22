@@ -1,5 +1,27 @@
 // ===== App SPA — Permis B Théorique Belgique =====
 
+// --- Thème clair/sombre ---
+(function initTheme(){
+  let theme = "light";
+  try{ theme = localStorage.getItem("permisb-theme") || "light"; }catch(e){}
+  document.documentElement.setAttribute("data-theme", theme);
+  const metaTheme = document.querySelector('meta[name="theme-color"]');
+  function appliquerCouleurNav(){
+    if(metaTheme) metaTheme.setAttribute("content", theme==="dark" ? "#0F1620" : "#0D2C55");
+  }
+  appliquerCouleurNav();
+  const btn = document.getElementById("btn-theme");
+  if(!btn) return;
+  btn.textContent = theme === "dark" ? "☀️" : "🌙";
+  btn.addEventListener("click", ()=>{
+    theme = theme === "dark" ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", theme);
+    btn.textContent = theme === "dark" ? "☀️" : "🌙";
+    appliquerCouleurNav();
+    try{ localStorage.setItem("permisb-theme", theme); }catch(e){}
+  });
+})();
+
 // --- Assemblage de la banque ---
 const THEMES = [
   {id:"signalisation", nom:"Signalisation", data:DATA_SIGNALISATION, forme:"triangle"},
@@ -409,6 +431,7 @@ function finirExamen(){
     if(r.correct) parTheme[t].correct++;
   });
   enregistrerStatsThemes(parTheme);
+  const historique = enregistrerHistoriqueExamen(score, reussi);
 
   const el = document.getElementById("vue-examen");
   el.innerHTML = `
@@ -420,6 +443,18 @@ function finirExamen(){
         <div>Erreurs ordinaires<br><b>${erreursOrdinaires}</b></div>
         <div class="g">Fautes graves<br><b>${fautesGraves}</b></div>
       </div>
+      ${historique.length>1 ? `
+      <div class="panneau-faibles">
+        <h4>Historique de tes derniers examens</h4>
+        <div class="historique-examens">
+          ${historique.slice(0,8).map(h=>`
+            <div class="ligne-historique">
+              <span class="date-historique">${h.date}</span>
+              <span class="score-historique ${h.reussi?'ok':'ko'}">${h.score}/50</span>
+            </div>
+          `).join("")}
+        </div>
+      </div>` : ""}
       <div class="panneau-faibles">
         <h4>Détail par thème (cette session)</h4>
         <div class="progression-themes">
@@ -471,6 +506,18 @@ function finirExamen(){
   }catch(e){}
 }
 
+function enregistrerHistoriqueExamen(score, reussi){
+  try{
+    const brut = localStorage.getItem("permisb-historique-examens");
+    const historique = brut ? JSON.parse(brut) : [];
+    const date = new Date().toLocaleDateString("fr-BE", {day:"2-digit", month:"2-digit", year:"numeric"});
+    historique.unshift({date, score, reussi});
+    const limite = historique.slice(0, 20);
+    localStorage.setItem("permisb-historique-examens", JSON.stringify(limite));
+    return limite;
+  }catch(e){ return []; }
+}
+
 // --- Suivi de progression par thème (cumulé, localStorage) ---
 function enregistrerStatsThemes(parTheme){
   try{
@@ -490,9 +537,9 @@ function lirePointsFaibles(){
     const brut = localStorage.getItem("permisb-stats-themes");
     if(!brut) return [];
     const cumul = JSON.parse(brut);
-    return Object.values(cumul)
-      .filter(t=>t.total>=3)
-      .map(t=>({...t, pct:Math.round((t.correct/t.total)*100)}))
+    return Object.entries(cumul)
+      .filter(([id,t])=>t.total>=3)
+      .map(([id,t])=>({...t, id, pct:Math.round((t.correct/t.total)*100)}))
       .sort((a,b)=>a.pct-b.pct);
   }catch(e){ return []; }
 }
@@ -502,6 +549,7 @@ function renderPointsFaibles(){
   if(!zone) return;
   const stats = lirePointsFaibles();
   if(!stats.length){ zone.innerHTML = ""; return; }
+  const plusFaible = stats[0];
   zone.innerHTML = `
     <div class="panneau-faibles">
       <h4>Votre progression cumulée par thème</h4>
@@ -515,8 +563,16 @@ function renderPointsFaibles(){
           </div>`;
         }).join("")}
       </div>
+      ${plusFaible.pct<80 ? `<button class="btn jaune btn-reviser-faible" id="btn-reviser-faible">🎯 Réviser « ${plusFaible.nom} » en flashcards</button>` : ""}
     </div>
   `;
+  const btnReviser = document.getElementById("btn-reviser-faible");
+  if(btnReviser) btnReviser.addEventListener("click", ()=>reviserTheme(plusFaible.id));
+}
+
+function reviserTheme(themeId){
+  allerA("flash");
+  demarrerFlash(themeId);
 }
 
 // ========================================================
@@ -881,6 +937,67 @@ function genererFicheMemo(){
 
 const btnFiche = document.getElementById("btn-fiche");
 if(btnFiche) btnFiche.addEventListener("click", genererFicheMemo);
+
+// ========================================================
+// EXPORT / IMPORT DE LA PROGRESSION
+// ========================================================
+const CLES_PROGRESSION = [
+  "permisb-meilleur-score",
+  "permisb-chapitres-lus",
+  "permisb-stats-themes",
+  "permisb-streak-quotidien",
+  "permisb-derniere-visite",
+  "permisb-meilleure-serie-flash",
+  "permisb-memory-termine",
+  "permisb-etoiles-chapitres",
+  "permisb-historique-examens",
+];
+
+function exporterProgression(){
+  const donnees = {};
+  CLES_PROGRESSION.forEach(cle=>{
+    try{
+      const v = localStorage.getItem(cle);
+      if(v !== null) donnees[cle] = v;
+    }catch(e){}
+  });
+  const blob = new Blob([JSON.stringify(donnees, null, 2)], {type:"application/json"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "permis-b-progression.json";
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function importerProgression(fichier){
+  const lecteur = new FileReader();
+  lecteur.onload = (e)=>{
+    try{
+      const donnees = JSON.parse(e.target.result);
+      CLES_PROGRESSION.forEach(cle=>{
+        if(donnees[cle] !== undefined) localStorage.setItem(cle, donnees[cle]);
+      });
+      alert("Progression importée avec succès. La page va se recharger.");
+      location.reload();
+    }catch(err){
+      alert("Ce fichier ne semble pas être une progression valide.");
+    }
+  };
+  lecteur.readAsText(fichier);
+}
+
+const btnExport = document.getElementById("btn-export");
+if(btnExport) btnExport.addEventListener("click", exporterProgression);
+const btnImport = document.getElementById("btn-import");
+const inputImport = document.getElementById("input-import");
+if(btnImport && inputImport){
+  btnImport.addEventListener("click", ()=>inputImport.click());
+  inputImport.addEventListener("change", (e)=>{
+    if(e.target.files[0]) importerProgression(e.target.files[0]);
+    inputImport.value = "";
+  });
+}
 
 // --- Raccourcis clavier (flashcards) ---
 document.addEventListener("keydown", (e)=>{

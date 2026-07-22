@@ -10,9 +10,25 @@
   --encre:#131C2B;
   --gris:#5B6B80;
   --trait:#D7DEE8;
+  --titre:var(--bleu-fonce); /* couleur des titres de contenu (distincte du chrome fixe) */
   --radius:14px;
   --ombre:0 2px 10px rgba(13,44,85,.08);
 }
+:root[data-theme="dark"]{
+  --bleu:#4A8FE0;
+  --rouge:#E6435C;
+  --jaune:#F2B700;
+  --vert:#3CBE7C;
+  --fond:#0F1620;
+  --carte:#1B2636;
+  --encre:#E8EDF5;
+  --gris:#93A4BC;
+  --trait:#2E3B4F;
+  --titre:#8FC1FF;
+  --ombre:0 2px 14px rgba(0,0,0,.4);
+}
+:root[data-theme="dark"] .exemple{background:#3A2E0A;color:#F0DFAE}
+:root[data-theme="dark"] .streak-jours{background:#3A2E0A;color:#F2B700}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{
@@ -41,6 +57,11 @@ header{
 .logo h1{font-size:1.02rem;font-weight:800;letter-spacing:.02em;line-height:1.15}
 .logo small{display:block;font-weight:500;color:#B9C9E2;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}
 nav{margin-left:auto;display:flex;gap:.4rem;flex-wrap:wrap}
+.btn-theme{
+  background:transparent;border:1.5px solid #3A5C8F;color:#D6E1F2;
+  border-radius:999px;width:2.1rem;height:2.1rem;font-size:1rem;flex:none;
+}
+.btn-theme:hover{border-color:#fff;color:#fff}
 nav button{
   background:transparent;border:2px solid transparent;color:#D6E1F2;
   padding:.45rem .8rem;border-radius:999px;font-weight:700;font-size:.86rem;
@@ -115,7 +136,7 @@ p.sous-titre{color:var(--gris);margin-bottom:1.2rem;font-size:.95rem}
 .badge-n{background:var(--fond);color:var(--gris);font-size:.75rem;font-weight:700;border-radius:999px;padding:.2rem .6rem}
 
 .contenu-cours{background:var(--carte);border:1.5px solid var(--trait);border-radius:var(--radius);padding:1.4rem;box-shadow:var(--ombre)}
-.contenu-cours h3{margin:1.3rem 0 .5rem;font-size:1.05rem;font-weight:800;color:var(--bleu-fonce);
+.contenu-cours h3{margin:1.3rem 0 .5rem;font-size:1.05rem;font-weight:800;color:var(--titre);
   padding-left:.7rem;border-left:4px solid var(--jaune)}
 .contenu-cours h3:first-child{margin-top:0}
 .contenu-cours p,.contenu-cours li{font-size:.93rem;line-height:1.6}
@@ -133,7 +154,7 @@ p.sous-titre{color:var(--gris);margin-bottom:1.2rem;font-size:.95rem}
 .toc-chapitre{
   background:var(--fond);border-radius:12px;padding:.9rem 1.1rem;margin-bottom:1rem;font-size:.88rem;
 }
-.toc-chapitre strong{display:block;margin-bottom:.4rem;color:var(--bleu-fonce);font-size:.82rem;text-transform:uppercase;letter-spacing:.04em}
+.toc-chapitre strong{display:block;margin-bottom:.4rem;color:var(--titre);font-size:.82rem;text-transform:uppercase;letter-spacing:.04em}
 .toc-chapitre ul{list-style:none;display:flex;flex-wrap:wrap;gap:.4rem .8rem;margin:0;padding:0}
 .toc-chapitre a{color:var(--bleu);font-weight:700;text-decoration:none}
 .toc-chapitre a:hover{text-decoration:underline}
@@ -143,12 +164,12 @@ p.sous-titre{color:var(--gris);margin-bottom:1.2rem;font-size:.95rem}
   background:var(--carte);border:1.5px solid var(--trait);border-radius:var(--radius);
   padding:1.4rem;margin-top:1rem;box-shadow:var(--ombre);text-align:center;
 }
-.quiz-chapitre-bloc h3{font-size:1.05rem;font-weight:800;color:var(--bleu-fonce);margin-bottom:.3rem}
+.quiz-chapitre-bloc h3{font-size:1.05rem;font-weight:800;color:var(--titre);margin-bottom:.3rem}
 .quiz-chapitre-bloc .sous-titre{margin-bottom:0}
 .carte-quiz-chapitre{text-align:left;box-shadow:none;border:none;padding:0;margin-top:1rem}
 .compteur-quiz{display:inline-block;font-size:.78rem;font-weight:800;color:var(--gris);margin-bottom:.6rem}
 .resultat-quiz-chapitre{padding:.5rem 0}
-.resultat-quiz-chapitre h4{font-size:1.1rem;font-weight:800;color:var(--bleu-fonce);margin-bottom:.8rem}
+.resultat-quiz-chapitre h4{font-size:1.1rem;font-weight:800;color:var(--titre);margin-bottom:.8rem}
 
 .nav-cours{display:flex;justify-content:space-between;gap:.6rem;margin-top:1rem;flex-wrap:wrap}
 
@@ -191,13 +212,13 @@ p.sous-titre{color:var(--gris);margin-bottom:1.2rem;font-size:.95rem}
 .config-exam{background:var(--carte);border:1.5px solid var(--trait);border-radius:var(--radius);padding:1.4rem;box-shadow:var(--ombre)}
 .regles{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:.8rem;margin:1rem 0}
 .regle{background:var(--fond);border-radius:10px;padding:.85rem;font-size:.86rem;line-height:1.45}
-.regle b{display:block;font-size:1.15rem;color:var(--bleu-fonce)}
+.regle b{display:block;font-size:1.15rem;color:var(--titre)}
 label.opt-chrono{display:flex;align-items:center;gap:.5rem;font-size:.9rem;margin:.8rem 0 1rem;color:var(--gris)}
 
 .barre-exam{display:flex;align-items:center;gap:.9rem;margin-bottom:1rem;flex-wrap:wrap}
 .progress{flex:1;height:10px;background:var(--trait);border-radius:999px;overflow:hidden;min-width:160px}
 .progress > div{height:100%;background:var(--bleu);border-radius:999px;transition:width .25s ease}
-.compteur{font-weight:800;font-size:.9rem;color:var(--bleu-fonce);white-space:nowrap}
+.compteur{font-weight:800;font-size:.9rem;color:var(--titre);white-space:nowrap}
 .chrono{font-weight:800;font-size:.95rem;color:var(--rouge);min-width:3.2rem;text-align:right}
 
 .carte-question{background:var(--carte);border:1.5px solid var(--trait);border-radius:var(--radius);padding:1.3rem;box-shadow:var(--ombre)}
@@ -313,7 +334,7 @@ footer b{color:#fff}
   background:var(--carte);border:1.5px solid var(--trait);border-radius:12px;
   padding:1rem 1.2rem;box-shadow:var(--ombre);
 }
-.entree-lexique strong{display:block;color:var(--bleu-fonce);font-size:.98rem;margin-bottom:.3rem}
+.entree-lexique strong{display:block;color:var(--titre);font-size:.98rem;margin-bottom:.3rem}
 .entree-lexique p{font-size:.88rem;color:var(--gris);line-height:1.55}
 
 /* Liens croisés entre chapitres */
@@ -338,11 +359,23 @@ footer b{color:#fff}
 .panneau-faibles{
   background:var(--fond);border-radius:12px;padding:1rem 1.1rem;margin-top:1rem;text-align:left;
 }
-.panneau-faibles h4{font-size:.9rem;font-weight:800;color:var(--bleu-fonce);margin-bottom:.5rem}
+.panneau-faibles h4{font-size:.9rem;font-weight:800;color:var(--titre);margin-bottom:.5rem}
+.btn-reviser-faible{margin-top:.9rem;width:100%}
+
+/* Historique des examens */
+.historique-examens{display:flex;flex-wrap:wrap;gap:.5rem}
+.ligne-historique{
+  display:flex;flex-direction:column;align-items:center;gap:.15rem;
+  background:var(--carte);border:1.5px solid var(--trait);border-radius:8px;padding:.4rem .6rem;font-size:.76rem;
+}
+.date-historique{color:var(--gris);font-weight:700}
+.score-historique{font-weight:800;font-size:.9rem}
+.score-historique.ok{color:var(--vert)}
+.score-historique.ko{color:var(--rouge)}
 
 /* Badges et streak */
 .panneau-badges{background:var(--fond);border-radius:12px;padding:1rem 1.1rem;margin-top:1rem;text-align:left}
-.panneau-badges h4{font-size:.9rem;font-weight:800;color:var(--bleu-fonce);margin-bottom:.7rem;display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
+.panneau-badges h4{font-size:.9rem;font-weight:800;color:var(--titre);margin-bottom:.7rem;display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
 .streak-jours{background:#FFF1D6;color:#B8730A;font-size:.72rem;font-weight:800;border-radius:999px;padding:.2rem .6rem}
 .grille-badges{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:.6rem}
 .badge-item{

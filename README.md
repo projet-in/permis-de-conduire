@@ -23,6 +23,9 @@ Ce n'est pas une reproduction littérale du texte légal complet du Code de la r
 - Table des matières, quiz rapide (5 questions, noté sur 3 étoiles) et liens croisés vers les chapitres liés, en fin de chaque chapitre
 - Mini-jeu Memory des panneaux
 - Badges/succès à débloquer et streak quotidien
+- Mode sombre (bouton 🌙 dans l'en-tête)
+- Historique des examens et bouton « réviser mon point faible » en un clic
+- Export/import de la progression (fichier JSON, pour ne rien perdre si le navigateur est vidé)
 - Lexique des sigles et termes techniques (MMA, PLS, ADR, SUL...)
 - Suivi des chapitres déjà lus et de la progression par thème (localStorage)
 - Recherche par mot-clé dans les cours

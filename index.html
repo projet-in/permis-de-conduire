@@ -2,6 +2,12 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
+<script>
+try{
+  var permisbTheme = localStorage.getItem("permisb-theme");
+  if(permisbTheme) document.documentElement.setAttribute("data-theme", permisbTheme);
+}catch(e){}
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Permis B Théorique — Belgique</title>
 <meta name="description" content="Entraînement gratuit au permis B théorique belge : cours, examen blanc de 50 questions, flashcards.">
@@ -34,6 +40,7 @@
       <button data-vue="flash">Flashcards</button>
       <button data-vue="memory">🃏 Memory</button>
     </nav>
+    <button class="btn-theme" id="btn-theme" type="button" aria-label="Changer de thème clair/sombre">🌙</button>
   </div>
 </header>
 
@@ -100,6 +107,9 @@
   Outil d'entraînement <b>non officiel</b>, à but pédagogique uniquement.<br>
   Réfère-toi toujours au Code de la route belge (arrêté royal du 1<sup>er</sup> décembre 1975) et aux supports officiels de ton auto-école.<br>
   <button class="lien-fiche" id="btn-fiche" type="button">🖨️ Imprimer une fiche mémo (A4)</button>
+  <button class="lien-fiche" id="btn-export" type="button">💾 Exporter ma progression</button>
+  <button class="lien-fiche" id="btn-import" type="button">📂 Importer une progression</button>
+  <input type="file" id="input-import" accept=".json" style="display:none">
 </footer>
 
 <div id="fiche-imprimable" class="fiche-print" aria-hidden="true"></div>
