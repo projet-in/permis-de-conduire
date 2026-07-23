@@ -72,13 +72,7 @@ const CATALOGUE_A = {
   A33:{nom:"Signaux lumineux de circulation", svg:triangleDanger(`<rect x="42" y="42" width="16" height="34" rx="4" fill="var(--encre)"/><circle cx="50" cy="50" r="4" fill="var(--rouge)"/><circle cx="50" cy="59" r="4" fill="var(--jaune)"/><circle cx="50" cy="68" r="4" fill="var(--vert)"/>`)},
   A35:{nom:"Survol d'avions à basse altitude", svg:triangleDanger(`<path d="M30,58 L50,50 L70,58 L58,60 L50,72 L42,60 Z" fill="var(--encre)"/>`)},
   A37:{nom:"Vent latéral", svg:triangleDanger(`<path d="M25,50 Q45,44 55,52 Q65,60 75,54" fill="none" stroke="var(--encre)" stroke-width="4"/><path d="M25,64 Q45,58 55,66" fill="none" stroke="var(--encre)" stroke-width="4"/>`)},
-  A39:{nom:"Circulation admise dans les deux sens", svg:triangleDanger(pFleche(35,50,35,68)+pFleche(65,68,65,50))},
-  A41:{nom:"Passage à niveau avec barrières", svg:triangleDanger(`<line x1="25" y1="68" x2="75" y2="45" stroke="var(--encre)" stroke-width="5"/><line x1="30" y1="60" x2="38" y2="70" stroke="var(--encre)" stroke-width="4"/><line x1="55" y1="50" x2="63" y2="60" stroke="var(--encre)" stroke-width="4"/>`)},
-  A43:{nom:"Passage à niveau sans barrières", svg:triangleDanger(pTrain(50,55,0.7))},
-  A45:{nom:"Passage à niveau à voie unique", svg:triangleDanger(`<line x1="30" y1="40" x2="70" y2="76" stroke="var(--encre)" stroke-width="4"/><line x1="70" y1="40" x2="30" y2="76" stroke="var(--encre)" stroke-width="4"/>`)},
-  A47:{nom:"Passage à niveau à deux ou plusieurs voies", svg:triangleDanger(`<line x1="26" y1="40" x2="58" y2="76" stroke="var(--encre)" stroke-width="3.5"/><line x1="58" y1="40" x2="26" y2="76" stroke="var(--encre)" stroke-width="3.5"/><line x1="50" y1="40" x2="82" y2="76" stroke="var(--encre)" stroke-width="3.5"/><line x1="82" y1="40" x2="50" y2="76" stroke="var(--encre)" stroke-width="3.5"/>`)},
   A49:{nom:"Croisement de la voie publique par une voie ferrée (tram)", svg:triangleDanger(pTrain(50,55,0.55)+`<line x1="25" y1="70" x2="75" y2="70" stroke="var(--encre)" stroke-width="3"/>`)},
-  A50:{nom:"File (circulation ralentie/bouchon)", svg:triangleDanger(`${pVoiture(38,50,0.4)}${pVoiture(50,58,0.4)}${pVoiture(62,66,0.4)}`)},
   A51:{nom:"Danger non déterminé par un symbole spécial", svg:triangleDanger(pExclamation(50,58))},
 };
 
@@ -99,8 +93,6 @@ const CATALOGUE_B = {
   `)},
   B19:{nom:"Passage étroit : cédez le passage aux véhicules venant en sens inverse", svg:PANNEAUX.B19},
   B21:{nom:"Passage étroit : priorité par rapport aux véhicules venant en sens inverse", svg:PANNEAUX.B21},
-  B22:{nom:"Cédez le passage aux cyclistes (direction indiquée)", svg:triangleCeder(`${pVelo(50,55,0.7)}${pFleche(62,68,78,68)}`)},
-  B23:{nom:"Cédez le passage aux cyclistes (autre direction)", svg:triangleCeder(`${pVelo(50,60,0.7)}${pFleche(50,72,50,50)}`)},
 };
 
 // --- Famille C : signaux d'interdiction (rond, bord rouge) ---
@@ -108,7 +100,6 @@ const CATALOGUE_C = {
   C1:{nom:"Sens interdit", svg:PANNEAUX.C1},
   C3:{nom:"Circulation interdite dans les deux sens", svg:PANNEAUX.C3},
   C5:{nom:"Accès interdit aux véhicules à moteur à plus de deux roues (et motos avec side-car)", svg:rondInterdiction(pVoiture(50,55,0.9))},
-  C6:{nom:"Accès interdit aux véhicules à moteur 4 roues type tout-terrain (quad)", svg:rondInterdiction(`<rect x="30" y="50" width="40" height="16" rx="6" fill="var(--encre)"/><circle cx="36" cy="68" r="8" fill="none" stroke="var(--encre)" stroke-width="4"/><circle cx="64" cy="68" r="8" fill="none" stroke="var(--encre)" stroke-width="4"/>`)},
   C7:{nom:"Accès interdit aux motocyclettes", svg:rondInterdiction(pMoto(50,55,0.85))},
   C9:{nom:"Accès interdit aux cyclomoteurs", svg:rondInterdiction(pMoto(50,55,0.7))},
   C11:{nom:"Accès interdit aux cycles (vélos)", svg:rondInterdiction(pVelo(50,55,0.85))},
@@ -171,8 +162,8 @@ const CATALOGUE_E = {
 
 // --- Famille F : signaux d'indication (carré/rectangle bleu, ou blanc pour F1/F3) ---
 const CATALOGUE_F = {
-  F1a:{nom:"Entrée d'agglomération", svg:PANNEAUX.F1}, F1b:{nom:"Entrée d'agglomération (variante)", svg:PANNEAUX.F1},
-  F3a:{nom:"Sortie d'agglomération", svg:PANNEAUX.F3}, F3b:{nom:"Sortie d'agglomération (variante)", svg:PANNEAUX.F3},
+  F1:{nom:"Entrée d'agglomération", svg:PANNEAUX.F1},
+  F3:{nom:"Sortie d'agglomération", svg:PANNEAUX.F3},
   F4a:{nom:"Zone 30", svg:PANNEAUX.F4a}, F4b:{nom:"Fin de zone 30", svg:PANNEAUX.F4b},
   F5:{nom:"Début d'autoroute", svg:PANNEAUX.F5}, F7:{nom:"Fin d'autoroute", svg:PANNEAUX.F7},
   F8:{nom:"Début de route pour automobiles", svg:PANNEAUX.F9}, F9:{nom:"Fin de route pour automobiles", svg:carreIndication(`${pVoiture(50,55,0.7,"#fff")}<line x1="20" y1="80" x2="80" y2="20" stroke="var(--encre)" stroke-width="5"/>`)},
@@ -269,35 +260,7 @@ function panneauAdditionnel(texte){
   return svgWrap(`<rect x="4" y="20" width="92" height="60" fill="#fff" stroke="var(--encre)" stroke-width="4"/><text x="50" y="58" text-anchor="middle" font-size="22" font-weight="800" fill="var(--encre)" font-family="Arial">${texte}</text>`, "0 0 100 100");
 }
 const CATALOGUE_G = {
-  "G additionnel Type I":{nom:"Panneau additionnel Type I", svg:panneauAdditionnel("I")},
-  "G additionnel Type II":{nom:"Panneau additionnel Type II", svg:panneauAdditionnel("II")},
-  "G additionnel Type III":{nom:"Panneau additionnel Type III", svg:panneauAdditionnel("III")},
-  "G additionnel Type IV":{nom:"Panneau additionnel Type IV", svg:panneauAdditionnel("IV")},
-  "G additionnel Type V":{nom:"Panneau additionnel Type V", svg:panneauAdditionnel("V")},
-  "G additionnel Type VI":{nom:"Panneau additionnel Type VI", svg:panneauAdditionnel("VI")},
-  "G additionnel Type VII":{nom:"Panneau additionnel Type VII", svg:panneauAdditionnel("VII")},
-  "G additionnel Type VIII":{nom:"Panneau additionnel Type VIII", svg:panneauAdditionnel("VIII")},
-  "G additionnel Type IX":{nom:"Panneau additionnel Type IX", svg:panneauAdditionnel("IX")},
-  "G additionnel Type X":{nom:"Panneau additionnel Type X", svg:panneauAdditionnel("X")},
   "G additionnel Type XI":{nom:"Panneau additionnel Type XI", svg:panneauAdditionnel("XI")},
-  "G additionnel Type G X":{nom:"Panneau additionnel (sortie de droite)", svg:panneauAdditionnel("→")},
-  "G additionnel Type G XI":{nom:"Panneau additionnel (début de réglementation)", svg:panneauAdditionnel("▮")},
-};
-
-// --- Famille Z : signalisation temporaire (fond jaune, chantiers) ---
-function temporaire(inner){
-  return svgWrap(`<rect x="10" y="30" width="80" height="80" fill="var(--jaune)" stroke="var(--encre)" stroke-width="3" transform="rotate(45 50 70)"/>${inner}`, "0 0 100 130");
-}
-const CATALOGUE_Z = {
-  ZC5:{nom:"Temporaire — Accès interdit aux cyclistes (chantier)", svg:temporaire(`<g transform="translate(0,15)">${pVelo(50,55,0.7)}</g>`)},
-  ZE1:{nom:"Temporaire — Stationnement interdit (chantier)", svg:temporaire(`<circle cx="50" cy="65" r="26" fill="var(--bleu)" stroke="#fff" stroke-width="3"/><line x1="32" y1="83" x2="68" y2="47" stroke="var(--rouge)" stroke-width="6"/>`)},
-  ZE9:{nom:"Temporaire — Stationnement autorisé (chantier)", svg:temporaire(`<circle cx="50" cy="65" r="26" fill="var(--bleu)" stroke="#fff" stroke-width="3"/><text x="50" y="75" text-anchor="middle" font-size="28" font-weight="800" fill="#fff" font-family="Arial">P</text>`)},
-  ZC21:{nom:"Temporaire — Masse par essieu limitée (chantier)", svg:temporaire(`<circle cx="50" cy="65" r="26" fill="#fff" stroke="var(--rouge)" stroke-width="5"/><text x="50" y="73" text-anchor="middle" font-size="16" font-weight="800" fill="var(--encre)" font-family="Arial">10t</text>`)},
-  ZC35:{nom:"Temporaire — Dépassement interdit (chantier)", svg:temporaire(`<circle cx="50" cy="65" r="26" fill="#fff" stroke="var(--rouge)" stroke-width="5"/><rect x="26" y="58" width="20" height="11" rx="2" fill="var(--rouge)"/><rect x="50" y="58" width="20" height="11" rx="2" fill="var(--encre)"/>`)},
-  ZC37:{nom:"Temporaire — Fin d'interdiction de dépasser", svg:temporaire(`<circle cx="50" cy="65" r="26" fill="#fff" stroke="var(--gris)" stroke-width="5"/><line x1="30" y1="83" x2="70" y2="47" stroke="var(--gris)" stroke-width="4"/>`)},
-  ZC43:{nom:"Temporaire — Vitesse maximale imposée (chantier)", svg:temporaire(`<circle cx="50" cy="65" r="26" fill="#fff" stroke="var(--rouge)" stroke-width="5"/><text x="50" y="75" text-anchor="middle" font-size="24" font-weight="800" fill="var(--encre)" font-family="Arial">50</text>`)},
-  "ZC45 50kmh":{nom:"Temporaire — Fin de vitesse 50 km/h", svg:temporaire(`<circle cx="50" cy="65" r="26" fill="#fff" stroke="var(--gris)" stroke-width="5"/><text x="50" y="73" text-anchor="middle" font-size="18" font-weight="800" fill="var(--gris)" font-family="Arial" opacity="0.6">50</text><line x1="30" y1="83" x2="70" y2="47" stroke="var(--gris)" stroke-width="4"/>`)},
-  "ZF111 ZF113":{nom:"Temporaire — Rue cyclable / fin de rue cyclable", svg:temporaire(`<g transform="translate(0,10)">${pVelo(50,58,0.6)}</g>`)},
 };
 
 // --- Famille M : marquages au sol (vue de dessus d'une chaussée) ---
@@ -316,20 +279,6 @@ const CATALOGUE_M = {
   M8:{nom:"Marquage de mise en garde (chevrons)", svg:marquage(`<polygon points="50,20 65,45 50,40 35,45" fill="#fff"/><polygon points="50,55 65,80 50,75 35,80" fill="#fff"/>`)},
   M9:{nom:"Zone d'évitement (hachures)", svg:marquage(`<line x1="20" y1="20" x2="40" y2="10" stroke="#fff" stroke-width="4"/><line x1="20" y1="40" x2="50" y2="10" stroke="#fff" stroke-width="4"/><line x1="20" y1="60" x2="60" y2="10" stroke="#fff" stroke-width="4"/><line x1="20" y1="80" x2="70" y2="10" stroke="#fff" stroke-width="4"/><line x1="30" y1="90" x2="80" y2="20" stroke="#fff" stroke-width="4"/>`)},
   M10:{nom:"Site franchissable bus/tram (damier)", svg:svgWrap(`<rect width="100" height="100" fill="#8A8F98"/>${[0,1,2,3,4].map(r=>[0,1,2,3,4].map(c=>(r+c)%2===0?`<rect x="${c*20}" y="${r*20}" width="20" height="20" fill="#fff"/>`:'').join('')).join('')}`)},
-  M11:{nom:"Emplacement de stationnement délimité", svg:marquage(`<rect x="20" y="15" width="60" height="70" fill="none" stroke="#fff" stroke-width="4"/>`)},
-  M12:{nom:"Emplacement PMR", svg:marquage(`<rect x="20" y="15" width="60" height="70" fill="none" stroke="#fff" stroke-width="4"/><circle cx="50" cy="42" r="10" fill="none" stroke="#fff" stroke-width="3"/><path d="M42,55 Q50,48 58,55 L58,70 Q50,75 42,70 Z" fill="#fff"/>`)},
-  M13:{nom:"Bande cyclable marquée", svg:marquage(`${pVelo(50,50,0.6,"#fff")}`)},
-  M14:{nom:"Sas vélo au feu", svg:marquage(`<rect x="15" y="60" width="70" height="20" fill="none" stroke="#fff" stroke-width="3"/>${pVelo(50,70,0.4,"#fff")}`)},
-  M15:{nom:"Texte « BUS » sur chaussée", svg:marquage(`<text x="50" y="60" text-anchor="middle" font-size="20" font-weight="800" fill="#fff" font-family="Arial">BUS</text>`)},
-  M16:{nom:"Damier de zone de rencontre", svg:marquage(`<rect x="20" y="20" width="15" height="15" fill="#fff"/><rect x="50" y="20" width="15" height="15" fill="#fff"/><rect x="35" y="50" width="15" height="15" fill="#fff"/><rect x="65" y="50" width="15" height="15" fill="#fff"/>`)},
-  M17:{nom:"Ligne d'effet de feux (avancée cyclistes)", svg:marquage(`<rect x="10" y="35" width="80" height="6" fill="#fff"/><rect x="10" y="55" width="80" height="6" fill="#fff"/>`)},
-  M18:{nom:"Marquage de giratoire", svg:svgWrap(`<circle cx="50" cy="50" r="48" fill="#8A8F98"/><circle cx="50" cy="50" r="20" fill="#6E7278"/><circle cx="50" cy="50" r="34" fill="none" stroke="#fff" stroke-width="4" stroke-dasharray="10 8"/>`)},
-  M19:{nom:"Flèche de direction oblique", svg:marquage(pFleche(35,85,65,20,"#fff"))},
-  M20:{nom:"Marquage de voie réservée (losange)", svg:marquage(`<polygon points="50,25 65,50 50,75 35,50" fill="none" stroke="#fff" stroke-width="4"/>`)},
-  M21:{nom:"Numéro de route sur chaussée", svg:marquage(`<text x="50" y="60" text-anchor="middle" font-size="18" font-weight="800" fill="#fff" font-family="Arial">N5</text>`)},
-  M22:{nom:"Ligne de guidage cyclable pointillée", svg:marquage(`<circle cx="50" cy="15" r="4" fill="#fff"/><circle cx="50" cy="35" r="4" fill="#fff"/><circle cx="50" cy="55" r="4" fill="#fff"/><circle cx="50" cy="75" r="4" fill="#fff"/><circle cx="50" cy="95" r="4" fill="#fff"/>`)},
-  M23:{nom:"Marquage de zone de stationnement payant", svg:marquage(`<rect x="20" y="15" width="60" height="70" fill="none" stroke="#fff" stroke-width="4"/><text x="50" y="55" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Arial">P</text>`)},
-  M24:{nom:"Marquage de bande d'arrêt d'urgence", svg:marquage(`<rect x="70" y="0" width="6" height="100" fill="#fff" stroke-dasharray="2 2"/><rect x="46" y="6" width="8" height="16" fill="#fff"/><rect x="46" y="34" width="8" height="16" fill="#fff"/><rect x="46" y="62" width="8" height="16" fill="#fff"/>`)},
 };
 
 // --- Famille S : panneaux touristiques et de services ---
@@ -360,32 +309,6 @@ const CATALOGUE_S = {
   S36:{nom:"Parc naturel", svg:carreIndication(`<circle cx="40" cy="55" r="13" fill="#fff"/><circle cx="60" cy="48" r="10" fill="#fff"/><circle cx="52" cy="62" r="8" fill="#fff"/>`)},
 };
 
-// --- Famille W : panneaux belges spécifiques (sensibilisation, chantiers, frontières) ---
-const CATALOGUE_W = {
-  "W Main Stop":{nom:"Signal manuel d'arrêt (agent/signaleur)", svg:svgWrap(`<circle cx="50" cy="50" r="44" fill="var(--rouge)" stroke="#fff" stroke-width="4"/><text x="50" y="60" text-anchor="middle" font-size="20" font-weight="800" fill="#fff" font-family="Arial">STOP</text>`)},
-  "W Pente":{nom:"Pente ou rampe importante", svg:triangleDanger(`<path d="M25,68 L75,68 L75,40 Z" fill="none" stroke="var(--encre)" stroke-width="4"/><text x="45" y="62" font-size="14" font-weight="800" fill="var(--encre)" font-family="Arial">12%</text>`)},
-  "W Prélévement kilométrique":{nom:"Prélèvement kilométrique (télépéage poids lourds)", svg:carreIndication(`<rect x="30" y="42" width="40" height="26" rx="3" fill="#fff"/><text x="50" y="60" text-anchor="middle" font-size="12" font-weight="800" fill="var(--bleu)" font-family="Arial">km</text>`)},
-  "W Prudence motards":{nom:"Prudence, motards", svg:triangleDanger(pMoto(50,58,0.9))},
-  "W Radar":{nom:"Contrôle radar", svg:svgWrap(`<rect x="6" y="6" width="88" height="88" rx="10" fill="#fff" stroke="var(--encre)" stroke-width="4"/><rect x="34" y="30" width="32" height="40" rx="4" fill="var(--encre)"/><circle cx="50" cy="45" r="8" fill="var(--bleu)"/>`)},
-  "W Sortie autoroutière":{nom:"Approche de sortie autoroutière", svg:carreIndication(pFleche(30,55,80,55,"#fff"))},
-  "W Soyons courtois":{nom:"Message de courtoisie routière", svg:svgWrap(`<rect x="6" y="6" width="88" height="88" rx="10" fill="var(--bleu)" stroke="#fff" stroke-width="4"/><text x="50" y="45" text-anchor="middle" font-size="13" font-weight="800" fill="#fff" font-family="Arial">SOYONS</text><text x="50" y="65" text-anchor="middle" font-size="13" font-weight="800" fill="#fff" font-family="Arial">COURTOIS</text>`)},
-  "W Tirette":{nom:"Principe de la tirette (fermeture éclair)", svg:carreIndication(`${pFleche(25,75,50,50,"#fff")}${pFleche(75,75,50,50,"#fff")}`)},
-  "W Zone à risque":{nom:"Zone à risque d'accidents", svg:triangleDanger(pExclamation(50,58))},
-  "W Aire de réglage des rétroviseurs":{nom:"Aire de réglage des rétroviseurs (poids lourds)", svg:carreIndication(`${pCamion(50,55,0.6,"#fff")}<circle cx="72" cy="42" r="6" fill="none" stroke="#fff" stroke-width="3"/>`)},
-  "W Camion percuté par l'arrière":{nom:"Danger de collision arrière avec poids lourd", svg:triangleDanger(`${pCamion(55,55,0.65)}<polygon points="25,66 32,58 32,74" fill="var(--rouge)"/>`)},
-  "W chantiers smiley":{nom:"Radar pédagogique souriant (zone de chantier)", svg:svgWrap(`<rect x="6" y="6" width="88" height="88" rx="10" fill="var(--jaune)" stroke="var(--encre)" stroke-width="4"/><circle cx="50" cy="45" r="20" fill="none" stroke="var(--encre)" stroke-width="4"/><circle cx="42" cy="40" r="3" fill="var(--encre)"/><circle cx="58" cy="40" r="3" fill="var(--encre)"/><path d="M40,52 Q50,60 60,52" fill="none" stroke="var(--encre)" stroke-width="3"/>`)},
-  "W chaussée voie centrale CVC":{nom:"Chaussée à voie centrale banalisée (CVC)", svg:carreIndication(`${pFleche(50,75,50,50,"#fff")}${pFleche(30,50,30,75,"#fff")}${pFleche(70,50,70,75,"#fff")}`)},
-  "W Croisement chemin réservé type III":{nom:"Croisement avec chemin réservé (type III)", svg:triangleDanger(`<line x1="25" y1="58" x2="75" y2="58" stroke="var(--encre)" stroke-width="4"/><line x1="50" y1="42" x2="50" y2="74" stroke="var(--encre)" stroke-width="4" stroke-dasharray="6 4"/>`)},
-  "W Dépose minute":{nom:"Zone de dépose-minute (kiss & ride)", svg:carreIndication(`${pVoiture(45,58,0.55,"#fff")}<text x="70" y="42" text-anchor="middle" font-size="20" font-weight="800" fill="#fff" font-family="Arial">P</text>`)},
-  "W Distance vélos":{nom:"Distance latérale de dépassement des cyclistes", svg:carreIndication(`${pVoiture(30,58,0.4,"#fff")}${pVelo(72,58,0.45,"#fff")}<line x1="42" y1="58" x2="60" y2="58" stroke="#fff" stroke-width="3"/>`)},
-  "W F34b2":{nom:"Schéma de bandes (variante W)", svg:CATALOGUE_F.F34b2.svg},
-  "W F50bis d":{nom:"Direction hôpital (variante W)", svg:CATALOGUE_F.F50bis.svg},
-  "W F79d":{nom:"Direction port (variante W)", svg:CATALOGUE_F.F79.svg},
-  "W Frontière Belgique":{nom:"Passage de frontière — Belgique", svg:carreIndication(`<rect x="25" y="35" width="50" height="10" fill="#000"/><rect x="25" y="45" width="50" height="10" fill="var(--jaune)"/><rect x="25" y="55" width="50" height="10" fill="var(--rouge)"/>`)},
-  "W Frontière européenne":{nom:"Passage de frontière — Union européenne", svg:carreIndication(`<circle cx="50" cy="50" r="20" fill="none" stroke="#fff" stroke-width="3"/>${[0,30,60,90,120,150,180,210,240,270,300,330].map(a=>{const r=Math.PI*a/180;const x=50+16*Math.cos(r),y=50+16*Math.sin(r);return `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="2" fill="#fff"/>`;}).join('')}`)},
-  "W Intempéries":{nom:"Conditions météo dangereuses (alerte)", svg:triangleDanger(`<line x1="35" y1="45" x2="35" y2="70" stroke="var(--encre)" stroke-width="3"/><line x1="50" y1="42" x2="50" y2="73" stroke="var(--encre)" stroke-width="3"/><line x1="65" y1="45" x2="65" y2="70" stroke="var(--encre)" stroke-width="3"/>`)},
-};
-
 // --- Agrégation finale : toutes les familles, pour la page Catalogue ---
 const CATALOGUE_FAMILLES = [
   {id:"A", nom:"A — Signaux de danger",      forme:"triangle", data:CATALOGUE_A},
@@ -397,8 +320,6 @@ const CATALOGUE_FAMILLES = [
   {id:"G", nom:"G — Panneaux additionnels",   forme:"carre",     data:CATALOGUE_G},
   {id:"M", nom:"M — Marquages au sol",        forme:"carre",     data:CATALOGUE_M},
   {id:"S", nom:"S — Signaux touristiques",    forme:"carre",     data:CATALOGUE_S},
-  {id:"W", nom:"W — Panneaux belges spécifiques", forme:"losange", data:CATALOGUE_W},
-  {id:"Z", nom:"Z — Signalisation temporaire (chantiers)", forme:"rond", data:CATALOGUE_Z},
 ];
 
 

@@ -79,7 +79,7 @@ function renderListeChapitres(){
     <p class="sous-titre">${COURS.length} chapitres, avec exemples concrets, pour comprendre avant de s'entraîner.</p>
     <input type="search" class="recherche-cours" id="recherche-cours" placeholder="🔎 Rechercher un mot-clé (ex. STOP, alcool, rond-point...)">
     <button class="btn discret btn-lexique" id="btn-lexique">📖 Lexique des sigles et termes</button>
-    <button class="btn discret btn-lexique" id="btn-catalogue">🚸 Catalogue complet des panneaux (291)</button>
+    <button class="btn discret btn-lexique" id="btn-catalogue">🚸 Catalogue complet des panneaux (223)</button>
     <div class="liste-chapitres" id="liste-chapitres">
       ${COURS.map((c,i)=>`
         <button class="chapitre-item" data-chap="${i}">
@@ -121,7 +121,7 @@ function renderCatalogueComplet(){
   el.innerHTML = `
     <button class="btn discret" data-back>← Tous les chapitres</button>
     <h2 class="titre-vue" style="margin-top:.8rem">Catalogue complet des panneaux</h2>
-    <p class="sous-titre">291 panneaux officiels belges (familles A à Z), à titre de référence visuelle. Illustrations originales inspirées des dessins techniques du SPW.</p>
+    <p class="sous-titre">223 panneaux officiels belges (familles A à S) : vraies images officielles (Wikimedia Commons, domaine public) là où elles existent, illustrations originales sinon.</p>
     <input type="search" class="recherche-cours" id="recherche-catalogue" placeholder="🔎 Rechercher un code ou un mot (ex. B1, cycliste, stop...)">
     <div id="zone-catalogue">
       ${CATALOGUE_FAMILLES.map(f=>`

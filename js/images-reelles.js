@@ -20,6 +20,8 @@ const RESOLUTION_CODE_IMAGE = {
   A7: "A7a",
   D1: "D01a", D3: "D03", D5: "D05", D7: "D07", D9: "D09",
   E9a: "E9",
+  C31a: "C31g", C31b: "C31d",
+  "G additionnel Type XI": "GXI",
 };
 
 function imgPanneauReel(codeFichier, libelle){
