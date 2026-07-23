@@ -8,10 +8,15 @@ Site statique d'entraînement au permis B théorique belge : cours, examen blanc
 - `sw.js` — service worker : le site fonctionne hors ligne après une première visite
 - `css/style.css` — styles
 - `js/data-*.js` — banque de 321 questions (10 thèmes)
-- `js/visuels.js` — bibliothèque de panneaux et scènes SVG utilisés dans cours/examen/flashcards + détection automatique du visuel pertinent pour une question
-- `js/catalogue-panneaux.js` — catalogue de référence des 291 panneaux officiels belges (familles A à Z), illustrations SVG originales
+- `js/visuels.js` — bibliothèque de panneaux et scènes SVG (illustrations originales, utilisées quand aucune image officielle n'existe) + détection automatique du visuel pertinent pour une question
+- `js/catalogue-panneaux.js` — catalogue de référence des 291 panneaux officiels belges (familles A à Z)
+- `js/images-reelles.js` — remplace automatiquement les icônes maison par les vraies images officielles (Wikimedia Commons, domaine public) partout où elles existent
+- `img/panneaux/` — 215 images officielles de panneaux belges (licence domaine public, PD-B-road-sign)
 - `js/cours.js` — contenu des 10 chapitres de cours + lexique
 - `js/app.js` — logique de l'application
+
+## Panneaux : vraies images vs illustrations maison
+215 codes utilisent désormais les vraies images officielles (Wikimedia Commons, domaine public) : 35/48 dans les cours/examen/flashcards, 195/291 dans le catalogue complet. Les codes restants gardent une illustration SVG originale, soit parce qu'aucune image officielle n'existe pour ce code précis (ex. panneaux belges spécifiques hors Wikimedia), soit parce que le contenu doit varier dynamiquement (ex. les vitesses C43 30/50/70/90/120, une seule image ne pouvant montrer 5 nombres différents).
 
 ## Thèmes couverts
 Signalisation, priorités, vitesses, alcool & sanctions, stationnement, dépassement, secourisme & comportement en cas d'accident, écoconduite & chargement, usagers vulnérables & deux-roues, autoroutes & voies rapides.

@@ -186,7 +186,7 @@ p.sous-titre{color:var(--gris);margin-bottom:1.2rem;font-size:.95rem}
 }
 .signe-carte{display:flex;flex-direction:column;align-items:center;gap:.4rem;text-align:center}
 .signe-icone{width:56px;height:56px}
-.signe-icone svg{width:100%;height:100%;display:block;filter:drop-shadow(0 1px 2px rgba(19,28,43,.12))}
+.signe-icone svg,.signe-icone img{width:100%;height:100%;display:block;filter:drop-shadow(0 1px 2px rgba(19,28,43,.12))}
 .signe-legende{font-size:.72rem;font-weight:700;color:var(--gris);line-height:1.25}
 
 /* Scènes illustrées (situations concrètes) */
@@ -231,9 +231,9 @@ label.opt-chrono{display:flex;align-items:center;gap:.5rem;font-size:.9rem;margi
   background:var(--fond);border-radius:12px;padding:.9rem;
 }
 .visuel-question-signe{width:90px}
-.visuel-question-signe svg{width:100%;height:auto;display:block}
+.visuel-question-signe svg,.visuel-question-signe img{width:100%;height:auto;display:block}
 .visuel-question-scene{width:100%;max-width:420px}
-.visuel-question-scene svg{width:100%;height:auto;display:block;max-height:220px}
+.visuel-question-scene svg,.visuel-question-scene img{width:100%;height:auto;display:block;max-height:220px}
 .reponses{display:grid;gap:.6rem}
 .reponses button{
   text-align:left;background:var(--fond);border:2px solid var(--trait);border-radius:10px;
@@ -300,7 +300,7 @@ label.opt-chrono{display:flex;align-items:center;gap:.5rem;font-size:.9rem;margi
 .flash-recto .indice{color:#C6D6EC;font-size:.83rem;text-align:center}
 .visuel-flash{background:rgba(255,255,255,.12);padding:.55rem;margin:.6rem 0 0}
 .visuel-flash.visuel-question-signe{width:60px;margin-left:auto;margin-right:auto}
-.visuel-flash.visuel-question-scene svg{max-height:120px}
+.visuel-flash.visuel-question-scene svg,.visuel-flash.visuel-question-scene img{max-height:120px}
 .flash-verso{background:var(--carte);border:1.5px solid var(--trait);transform:rotateY(180deg)}
 .flash-verso .bonne-rep{font-weight:800;color:var(--vert);font-size:1.02rem;margin:.4rem 0 .6rem;line-height:1.45}
 .flash-verso .explication{margin-top:auto}
@@ -406,7 +406,7 @@ footer b{color:#fff}
 .carte-memory.trouvee{border-color:var(--vert)}
 .dos-memory{color:#fff;font-size:1.6rem;font-weight:800}
 .signe-icone-memory{width:100%;height:100%}
-.signe-icone-memory svg{width:100%;height:100%;display:block}
+.signe-icone-memory svg,.signe-icone-memory img{width:100%;height:100%;display:block}
 .fin-memory{text-align:center;margin-top:1.3rem;background:var(--carte);border:1.5px solid var(--trait);border-radius:var(--radius);padding:1.3rem;box-shadow:var(--ombre)}
 .fin-memory h3{font-size:1.15rem;font-weight:800;margin-bottom:.3rem}
 .fin-memory p{color:var(--gris);font-size:.9rem;margin-bottom:.9rem}
