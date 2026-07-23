@@ -23,7 +23,7 @@ const RESOLUTION_CODE_IMAGE = {
 };
 
 function imgPanneauReel(codeFichier, libelle){
-  return `<img src="img/panneaux/${codeFichier}.webp" alt="${libelle || ('Panneau '+codeFichier)}" style="width:100%;height:100%;object-fit:contain;display:block" loading="lazy">`;
+  return `<img src="${codeFichier}.webp" alt="${libelle || ('Panneau '+codeFichier)}" style="width:100%;height:100%;object-fit:contain;display:block" loading="lazy">`;
 }
 
 // Remplace chaque entrée de PANNEAUX (utilisé dans cours/examen/flashcards) par la vraie image si disponible.
